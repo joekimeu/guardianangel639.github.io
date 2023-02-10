@@ -42,7 +42,6 @@ img {
     left: 0px;
     margin: auto auto auto 0;
     position:sticky;
-
 }
 
 ul {
@@ -61,10 +60,12 @@ ul li a {
     text-decoration: none;
     text-align: center;
     font-size: 20px; 
+
 }
 
 ul li ul.dropdown li{
     display: block;
+    
 }
 
 ul li ul.dropdown {
@@ -77,6 +78,7 @@ ul li ul.dropdown {
 
 ul li a:hover {
     background: #112C66;
+    justify-content: center;
 }
 
 ul li:hover ul.dropdown {
@@ -96,6 +98,7 @@ ul li:hover ul.dropdown {
     font-size: 16px;
     color: white;
     text-decoration: none;
+    
 }
 
 .nav__list li a:hover {
@@ -149,12 +152,14 @@ ul li:hover ul.dropdown {
     align-items: center;
     margin : 0;
     padding: 0;
+
+    
 }
 
 .hamburger__link {
     color: inherit;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 26px;
     text-decoration: none;
 }
 
@@ -228,8 +233,8 @@ ul li:hover ul.dropdown {
     background-image: url(/Images/nurses1.jpg);
     background-size: cover;
     text-align: center;
-    height: 680px;
-    color:red;
+    height: 100vh;
+    color: #3586ff;
 }
 
 .buttons {
@@ -285,6 +290,8 @@ ul li:hover ul.dropdown {
     transform: rotate(150deg);
 }
 
+/* body end */
+
 /* footer start */
 footer {
     position: relative;
@@ -293,7 +300,7 @@ footer {
     height: 100%;
     padding: 10px 30px;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     flex-direction: column;
 }
@@ -309,12 +316,15 @@ footer .menu {
 
 footer .menu li {
     list-style: none;
-    font-size: 0.5em;
+    font-size: 0.75em;
     padding: 12px 6px;
+}
+footer .first-item-footer {
+    color: black;
 }
 
 footer .menu li a {
-    font-size: 0.7em; /* was 1.2 */
+    font-size: 0.7em;
     color: #FFF;
     margin: 0 0px;
     padding: 12px 3px;
@@ -328,13 +338,4 @@ footer .menu li a:hover {
     opacity: 1;
     color: chartreuse
 }
-
-/* footer p {
-    color: #FFF;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-} */
-
 /*footer end*/
