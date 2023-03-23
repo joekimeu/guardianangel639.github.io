@@ -8,13 +8,13 @@ html {
 }
 
 body {
-    background : white;
+    background : white; 
     margin: 0;
     line-height: 1.6;
 }
 
 section {
-    padding: 5em 2em;
+    padding: 2em 2em;
 }
 
 /* header */
@@ -226,35 +226,33 @@ ul li:hover ul.dropdown {
     background-color: white;
     background-size: cover;
 }
+
 .first-div {
     margin: 20px auto;
     width: 100%;
     padding: 8px;
 }
+
 .first-div-img {
     float: left;
     width: 300px;
     height: 100%;
     margin: 0 10px 0 0;
 }
+
 .first-div-text {
-    text-align: justify;
+    text-align:justify;
 }
 
-.second-div {
-    margin: 20px auto;
-    width: 100%;
-    padding: 8px;
+.second-div-text{
+    margin: 0 2em;
+    text-align:center; 
 }
-.second-div-img {
-    float: right;
-    width: 300px;
-    height: 100%;
-    margin: 0 0 10px 0;
+
+.second-div-text li {
+    list-style:circle;
 }
-.second-div-text {
-    text-align:initial;
-}
+
 /* primary body end */
 
 /* footer start */

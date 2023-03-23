@@ -100,7 +100,7 @@ ul li:hover ul.dropdown {
     
 }
 
-.nav__list li a:hover {
+.dropdown li a:hover {
     color: chartreuse;
 }
 
