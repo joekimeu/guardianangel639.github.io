@@ -2,15 +2,15 @@
 <html lang = "en">
     <head>
         <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
         <title>Guardian Angel Health Agency LLC</title>
 
         <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
         <link rel = "stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
-        integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+        integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tinos">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-        <link rel = "stylesheet" href = "../Style Sheets/leadership.css" type = "text/css"/>
+        <link rel = "stylesheet" href = "Style Sheets/login.css" type = "text/css">
     </head>
 
     <body>
@@ -73,40 +73,37 @@
             </nav>
         </header>
 
-        <section class = "primary-body">
-            <h1 class="operating-committee">Operating Committee</h1>
+        <section class = "main-body">
+            <div class="wrapper">
+                <form action="connect.php" id = "form" method="POST">
+                    <!-- ensure username and password comply with database information 
+                    then move user to currentemployees html-->
+                    <h1>Login</h1>
 
-            <div class="information">
-                <h1>Thomas Kamau, PhD, MPH, MBA</h1>
-                <div class="job-title">Founder and Board Member</div>
-                <p>Thomas Kamau is the founder and current Board Member of Guardian Angel Health Agency. He is also a Associate Professor of Health Sciences at Ohio University in Athens, Ohio.</p>
-                
-                <h2>Contact information</h2>
-                <h3>Email &#8594 <a href="mailto: thomas@guardianangelha.com" target="_blank" rel="noopener noreferrer">thomas@guardianangelha.com</a></h3>
-            
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" id = "name" name = "username" required>
+                    </div>
 
-                <h1>Anne Mulama, RN, BSN</h1>
-                <div class="job-title">Chief Executive Officer and Director of Clinical Services</div>
-                <p>Anne Mulama is Chief Executive Officer and Director of Clinial Services at Guardian Angel Health Agency. She brings more than 15 years
-                of nursing experience from various hospitals, including The Ohio State University, the Cleveland Clinic, and OhioHealth.
-                </p>
-                
-                <h2>Contact information</h2>
-                <h3>Email &#8594 <a href="mailto: anne@guardianangelha.com" target="_blank" rel="noopener noreferrer">anne@guardianangelha.com</a></h3>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" id = "password" name = "password" required>
+                    </div>
 
-                <h1>Lora Dickerson</h1>
-                <div class="job-title">Office Manager</div>
-                <p>Lora Dickerson is the Office Manager at Guardian Angel Health Agency.</p>
-                
-                <h2>Contact information</h2>
-                <h3>Email &#8594 <a href="mailto: office.manager@guardianangelha.com" target="_blank" rel="noopener noreferrer">office.manager@guardianangelha.com</a></h3>
+                    <div class="remember-forget">
+                        <label><input type="checkbox">Remember Me</label><br>
+                        <a href="#">Forget Login</a><br>        
+                        <!-- <a href="#">Create Login</a> -->
+
+                    </div>
+
+                    <button type="submit" class="btn">Submit</button>
+                </form>
             </div>
         </section>
 
-        <!--footer-->
+        <!-- footer--> 
         <footer>
             <ul class = "menu">
-                <li><strong>Guardian Angel Health Agency LLC © 2023</strong></li>
+                <li class="first-item-footer"><strong>Guardian Angel Health Agency LLC © 2023</strong></li>
                 <li><a href="tel:6148683225">Telephone</a></li>
                 <li><a href="tel:6146224435">Cell Phone</a></li>
                 <li><a href="tel:6148683437">Fax</a></li>
@@ -115,6 +112,6 @@
             </ul>
         </footer>
 
-        <script src = "../Scripts/index.js"></script>
+        <script src = "Scripts/index.js"></script>
     </body>
 </html>

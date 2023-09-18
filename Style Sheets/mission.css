@@ -1,6 +1,6 @@
 * {
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -8,24 +8,21 @@ html {
 }
 
 body {
-    background : white; 
+    background : white;
     margin: 0;
     line-height: 1.6;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 section {
-    padding: 2em 2em;
+    padding: 1em 2em;
 }
-
+    
 /* header */
 header {
-    top: 0%;
-    width: 100%;
-    background-color:#3586ff;
+    background-color:#37ff00; /*abff35 */
     display: flex;
     justify-content: space-between;
-    margin: 0;
-    padding: 0;
 }
 
 img {
@@ -34,10 +31,10 @@ img {
 }
 
 .logo {
-    max-width: 125px;
+    max-width: 275px;
     left: 0px;
     margin: auto auto auto 0;
-    position:sticky;
+    position: sticky;
 }
 
 ul {
@@ -50,66 +47,63 @@ ul li {
 }
 
 ul li a {
-    display: block;
-    padding: 20px 25px;
-    color: #FFF;
+    display: block; 
+    padding: 25px 25px;
+    color: black;
     text-decoration: none;
     text-align: center;
     font-size: 20px; 
-
 }
 
-ul li ul.dropdown li{
+ul.dropdown li{
     display: block;
-    
 }
 
-ul li ul.dropdown {
+ul.dropdown {
     width: 100%;
-    background: #22438C;
+    background: #37ff00;
     position: absolute;
     z-index: 999;
-    display: none;
+    display: none; 
 }
 
 ul li a:hover {
     background: #112C66;
     justify-content: center;
+    color: chartreuse;
 }
 
 ul li:hover ul.dropdown {
-    display: block;
+   display: block;
 }
 
-@media screen and (max-width : 757px) {
+
+@media screen and (max-width : 1050px) { /*change */
     .nav__list li a {
         display: none;
     }
 }
 
-.nav__list li a {
+.nav__list li a {   
     transition: all 0.3s ease 0s;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: 500;
-    font-size: 16px;
-    color: white;
+    font-size: 2em;
+    font-family: 'Times New Roman', Times, serif;
+    color: black;
     text-decoration: none;
-    
 }
 
-.dropdown li a:hover {
+ul.dropdown li a:hover {
     color: chartreuse;
 }
 
 .header-contact{
     padding: 9px 25px;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: aqua;
+    background-color: yellow;
     border: none;
-    border-radius: 50px;
+    border-radius: 40px;
     cursor: pointer;
-    transition: all 0.3s ease 0s;
-    margin-right: 1em;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .header-contact:hover{
@@ -118,7 +112,7 @@ ul li:hover ul.dropdown {
 
 /* nav toggle / hamburger start*/
 
-@media screen and (min-width : 757px) {
+@media screen and (min-width : 1050px) { /*change */
     .hamburger-toggle {
         display: none;
     }
@@ -126,17 +120,16 @@ ul li:hover ul.dropdown {
 
 .hamburger {
     position: fixed;
-    background: #3586ff;
-    color: #FFF;
+    background: #37ff00;
+    color: black;
     top: 0;
     bottom: 0;
     left: 0; 
     right: 0;
     z-index: 100;
-    
-
     transform: translateX(1000%);
     transition: transform 250ms cubic-bezier(0.5, 0, .5, 1);
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .hamburger__list {
@@ -147,17 +140,17 @@ ul li:hover ul.dropdown {
     justify-content: space-evenly;
     align-items: center;
     margin : 0;
-    padding: 0;
+    padding: 0; 
 }
 
-.hamburger__link {
+.hamburger__list a {
     color: inherit;
     font-weight: 500;
     font-size: 26px;
     text-decoration: none;
 }
 
-.hamburger__link:hover {
+.hamburger__list a:hover {
     color: chartreuse;
 }
 
@@ -168,7 +161,7 @@ ul li:hover ul.dropdown {
     cursor: pointer;
     position: absolute;
     right: 1em; 
-    top: 1em;
+    margin: 2.67em 0 0 0; /* margin for hamburger to move down*/
     z-index: 1000;
 }
 
@@ -201,7 +194,7 @@ ul li:hover ul.dropdown {
 .hamburger-button,
 .hamburger-button::before,
 .hamburger-button::after {
-    background: #FFF;
+    background: black;
     width: 2.3em;
     height: 3px;
     border-radius: 1em;
@@ -220,6 +213,9 @@ ul li:hover ul.dropdown {
 .hamburger-button::after{bottom: 7px;}
 
 /*nav toggle & hamburger end*/
+  
+
+
 
 /*primary body start */
 .primary-body {
@@ -229,42 +225,79 @@ ul li:hover ul.dropdown {
 
 .first-div {
     margin: 20px auto;
-    width: 100%;
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1100px;
+
 }
 
-.first-div-img {
-    float: left;
-    width: 300px;
-    height: 100%;
-    margin: 0 10px 0 0;
+.first-div img {
+    max-width: 1100px;
+    height: auto;
+}
+
+.first-div h2 {
+    margin: 15px 0;
+    background-color: black;
+    color: white;
+    opacity: 70%;
+    text-align: center;
+}
+
+.first-div-text i, b {
+    color: #375e97;
 }
 
 .first-div-text {
-    text-align:justify;
+    text-align: center;
+    font-size: large;
 }
 
 .second-div-text{
     margin: 0 2em;
-    text-align:center; 
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    font-size: large;
+}
+.second-div-text h3 {
+    color: #375e97;
 }
 
-.second-div-text li {
-    list-style:circle;
+.second-div-text div {
+    margin: 20px;
+}
+
+/*Ensuring that three columns are aligned and centered vertically as screen shrinks*/
+@media screen and (max-width: 750px) {
+    .second-div-text {
+        flex-direction: column;
+
+    }
+    .first-div {
+        margin: 20px;
+    }
+    .second-div-text div{
+        margin-bottom: 10px;
+    }
+}
+
+.second-div-text ol li {
+    list-style-type: none;
 }
 
 /* primary body end */
 
 /* footer start */
 footer {
-    position: relative; /* was relative */
-    /* bottom: 0;  */
+    position: relative;
     width: inherit;
-    background: #3586ff;
+    background: #37ff00 ;/* #3586ff; */
     height: 100%;
     padding: 10px 30px;
     display: flex;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     flex-direction: column;
 }
@@ -280,13 +313,16 @@ footer .menu {
 
 footer .menu li {
     list-style: none;
-    font-size: 0.75em;
+    font-size: 1em;
     padding: 12px 6px;
+}
+footer .first-item-footer {
+    color: black;
 }
 
 footer .menu li a {
-    font-size: 0.7em;
-    color: #FFF;
+    font-size: 1em;
+    color: black;
     margin: 0 0px;
     padding: 12px 3px;
     display: flex;
@@ -298,5 +334,17 @@ footer .menu li a {
 footer .menu li a:hover {
     opacity: 1;
     color: chartreuse
+}
+
+@media screen and (max-width : 747px) {
+    footer .menu {
+        display: grid;
+    }
+
+    footer .menu li {
+        list-style: none;
+        font-size: 1em;
+        padding: 0 6px;
+    }
 }
 /*footer end*/

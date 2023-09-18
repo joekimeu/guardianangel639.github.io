@@ -217,155 +217,113 @@ ul.dropdown li a:hover {
 
 
 
-/*contact me page start*/
-.contact {
-    position: relative;
-    min-height: 100vh;
-    padding: 50px 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: url(../Images/nurses11.jpeg);
-    background-size: cover;
+/*primary body start */
+.container {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-gap: 20px;
+    justify-content: space-evenly;
 }
-.contact .content {
-    max-width: 800px;
+
+.pdf-button {
+    padding: 9px 25px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(112, 200, 230);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 502;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.inservice-button {
+    padding: 9px 25px;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(112, 200, 230);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    font-weight: 502;
+    text-align: center;
+    margin: 2px 0;
+}
+
+.docsub {
+    text-align: center;
+    font-size: larger;
+}
+
+.docsub a {
+    text-decoration: none;
+}
+
+h1 {
+    width: max-content;
+    font-size: 36px;
+    position: relative;
+    cursor: pointer;
+    margin: 40px auto;
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    height: 4px;
+    width: 100%;
+    left: 0;
+    background-color: black ;
+}
+
+.box {
+    height: 200px;
+    color: black;
+    border: 2px solid black;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: rgb(228, 228, 228);
+    border-radius: 10px;
+    border-style: none;
+    justify-content: space-between;
+}
+
+.box h2 {
+    margin: 10px;
+}
+
+.box2 {
+    height: 200px;
+    color: black;
+    border: 2px solid black;
+    position: relative;
+    display: grid;
+    text-align: center;
+    background: rgb(228, 228, 228);
+    border-radius: 10px;
+    border-style: none;
+}
+
+.h2 {
+    text-transform: uppercase;
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.inservice-header-text {
+    text-transform: uppercase;
     text-align: center;
 }
 
-.contact .content h2 {
-    font-size: 36px;
-    font-weight: 500;
-    color: #3586ff;
-}
 
-.contact .content p {
-    font-weight: 300;
-    color: white;
-}
-
-.container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-}
-
-.container .contactInfo {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container .contactInfo .box {
-    position: relative;
-    padding: 20px;
-    display: flex;
-}
-.container .contactInfo .box .icon {
-    min-width: 60px;
-    height: 60px;
-    background: #FFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 22px;
-}
-
-.container .contactInfo .box .text {
-    display: flex;
-    margin-left: 20px;
-    font-size: 16px;
-    color: #FFF;
-    flex-direction: column;
-    font-weight: 300;
-}
-
-.container .contactInfo .box .text h3{
-    font-weight: 500;
-    color: #3586ff
-}
-
-.contactForm {
-    width: 40%;
-    padding: 40px;
-    background: #FFF;
-}
-
-.contactForm h2 {
-    font-size: 30px;
-    color: #333;
-    font-weight: 500;
-}
-
-.contactForm .inputBox {
-    position: relative;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.contactForm .inputBox input{
-    width: 100%;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    border: none;
-    border-bottom: 2px solid #333;
-    outline: none;
-    resize: none;
-}
-
-.contactForm .inputBox span{
-    position: absolute;
-    left: 0;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    pointer-events: none;
-    transition: 0.5s;
-    color: #666;
-}
-
-.contactForm .inputBox input:focus ~ span,
-.contactForm .inputBox input:valid ~ span
-.contactForm .inputBox textarea:focus ~ span,
-.contactForm .inputBox textarea:valid ~ span{
-    color: #e91e63;
-    font-size: 12px;
-    transform: translateY(-20px);
-
-}
-
-.contactForm .inputBox input[type="submit"] {
-    width: 100px;
-    background: #00bcd4;
-    color: #FFF;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 10px;
-}
-
-@media (max-width: 991px) {
-    .contact {
-        padding: 50px;
-    }
-    .container {
-        flex-direction: column;
-    }
-    .container .contactInfo {
-        margin-bottom: 40px;
-    }
-    .container .contactInfo,
-    .contactForm {
-        width: 100%;
-    }
-}
-
-/*contact me page ends*/
+/* primary body end */
 
 /* footer start */
 footer {

@@ -1,6 +1,6 @@
 * {
-    margin: 0;
-    padding: 0;
+margin: 0;
+padding: 0;
 }
 
 html {
@@ -11,18 +11,21 @@ body {
     background : white;
     margin: 0;
     line-height: 1.6;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 section {
-    padding: 1em 2em;
+    padding: 5em 2em;
 }
-    
+
 /* header */
 header {
+    top: 0%;
+    width: 100%;
     background-color:#37ff00; /*abff35 */
     display: flex;
     justify-content: space-between;
+    margin: 0;
+    padding: 0;
 }
 
 img {
@@ -31,10 +34,10 @@ img {
 }
 
 .logo {
-    max-width: 275px;
+    max-width: 275px;/*was 125 also will have to adjust px when i make hamburger appear*/
     left: 0px;
     margin: auto auto auto 0;
-    position: sticky;
+    position:sticky;
 }
 
 ul {
@@ -47,24 +50,26 @@ ul li {
 }
 
 ul li a {
-    display: block; 
+    display: block;
     padding: 25px 25px;
     color: black;
     text-decoration: none;
     text-align: center;
     font-size: 20px; 
+
 }
 
-ul.dropdown li{
+ul li ul.dropdown li{
     display: block;
+    
 }
 
-ul.dropdown {
+ul li ul.dropdown {
     width: 100%;
     background: #37ff00;
     position: absolute;
     z-index: 999;
-    display: none; 
+    display: none;
 }
 
 ul li a:hover {
@@ -84,26 +89,30 @@ ul li:hover ul.dropdown {
     }
 }
 
-.nav__list li a {   
+.nav__list li a {
     transition: all 0.3s ease 0s;
-    font-size: 2em;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 502;
+    font-size: 22px;
     color: black;
     text-decoration: none;
 }
 
-ul.dropdown li a:hover {
+
+.dropdown li a:hover {
     color: chartreuse;
 }
 
 .header-contact{
     padding: 9px 25px;
+    font-family: 'Courier New', Courier, monospace;
     background-color: yellow;
     border: none;
-    border-radius: 40px;
+    border-radius: 50px;
     cursor: pointer;
-    font-weight: bold;
-    font-family: 'Times New Roman', Times, serif;
+    transition: all 0.3s ease 0s;
+    margin-right: 1em;
+    font-weight: 502;
 }
 
 .header-contact:hover{
@@ -129,7 +138,6 @@ ul.dropdown li a:hover {
     z-index: 100;
     transform: translateX(1000%);
     transition: transform 250ms cubic-bezier(0.5, 0, .5, 1);
-    font-family: 'Times New Roman', Times, serif;
 }
 
 .hamburger__list {
@@ -143,14 +151,14 @@ ul.dropdown li a:hover {
     padding: 0; 
 }
 
-.hamburger__list a {
+.hamburger__link {
     color: inherit;
     font-weight: 500;
     font-size: 26px;
     text-decoration: none;
 }
 
-.hamburger__list a:hover {
+.hamburger__link:hover {
     color: chartreuse;
 }
 
@@ -213,159 +221,42 @@ ul.dropdown li a:hover {
 .hamburger-button::after{bottom: 7px;}
 
 /*nav toggle & hamburger end*/
-  
 
-
-
-/*contact me page start*/
-.contact {
-    position: relative;
-    min-height: 100vh;
-    padding: 50px 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: url(../Images/nurses11.jpeg);
+/*primary body start */
+.primary-body {
+    background-color: white;
     background-size: cover;
 }
-.contact .content {
-    max-width: 800px;
-    text-align: center;
-}
-
-.contact .content h2 {
-    font-size: 36px;
-    font-weight: 500;
-    color: #3586ff;
-}
-
-.contact .content p {
-    font-weight: 300;
-    color: white;
-}
-
-.container {
+.first-div {
+    margin: 20px auto;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
+    padding: 8px;
+}
+.first-div-img {
+    float: left;
+    width: 300px;
+    height: 100%;
+    margin: 0 10px 0 0;
+}
+.first-div-text {
+    text-align: justify;
 }
 
-.container .contactInfo {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container .contactInfo .box {
-    position: relative;
-    padding: 20px;
-    display: flex;
-}
-.container .contactInfo .box .icon {
-    min-width: 60px;
-    height: 60px;
-    background: #FFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 22px;
-}
-
-.container .contactInfo .box .text {
-    display: flex;
-    margin-left: 20px;
-    font-size: 16px;
-    color: #FFF;
-    flex-direction: column;
-    font-weight: 300;
-}
-
-.container .contactInfo .box .text h3{
-    font-weight: 500;
-    color: #3586ff
-}
-
-.contactForm {
-    width: 40%;
-    padding: 40px;
-    background: #FFF;
-}
-
-.contactForm h2 {
-    font-size: 30px;
-    color: #333;
-    font-weight: 500;
-}
-
-.contactForm .inputBox {
-    position: relative;
+.second-div {
+    margin: 20px auto;
     width: 100%;
-    margin-top: 10px;
+    padding: 8px;
 }
-
-.contactForm .inputBox input{
-    width: 100%;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    border: none;
-    border-bottom: 2px solid #333;
-    outline: none;
-    resize: none;
+.second-div-img {
+    float: right;
+    width: 300px;
+    height: 100%;
+    margin: 0 0 10px 0;
 }
-
-.contactForm .inputBox span{
-    position: absolute;
-    left: 0;
-    padding: 5px 0;
-    font-size: 16px;
-    margin: 10px 0;
-    pointer-events: none;
-    transition: 0.5s;
-    color: #666;
+.second-div-text {
+    text-align:initial;
 }
-
-.contactForm .inputBox input:focus ~ span,
-.contactForm .inputBox input:valid ~ span
-.contactForm .inputBox textarea:focus ~ span,
-.contactForm .inputBox textarea:valid ~ span{
-    color: #e91e63;
-    font-size: 12px;
-    transform: translateY(-20px);
-
-}
-
-.contactForm .inputBox input[type="submit"] {
-    width: 100px;
-    background: #00bcd4;
-    color: #FFF;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    font-size: 10px;
-}
-
-@media (max-width: 991px) {
-    .contact {
-        padding: 50px;
-    }
-    .container {
-        flex-direction: column;
-    }
-    .container .contactInfo {
-        margin-bottom: 40px;
-    }
-    .container .contactInfo,
-    .contactForm {
-        width: 100%;
-    }
-}
-
-/*contact me page ends*/
+/* primary body end */
 
 /* footer start */
 footer {
