@@ -219,17 +219,23 @@ ul.dropdown li a:hover {
 .main-body {
     background-image: white;
     text-align: center;
-    height: 30em;
+    align-items: center;
+    height: 40em;
+    display: flex;
+    justify-content: center;
 }
 
 .wrapper {
+    margin-top: 20px;
     text-align: center;
     background-color: lightblue;
-    /* width: 100%;
-    height: auto; */
+    width: 450px;
+    height: auto;
     color: black;
-    /* border-radius: 10px; */
-    
+    position: relative;
+    border-radius: 10px;    
+    display: flex;
+    justify-content: center;
 }
 
 .wrapper h1 {
@@ -240,6 +246,16 @@ ul.dropdown li a:hover {
 
 .input-box {
     padding: 5px 0 ;
+}
+
+#error {
+    margin: 10px 0;
+    border: red;
+    background-color: rgb(216, 160, 160);
+    text-align: center;
+    color: red;
+    border-radius: 5px;
+    width: 280px;
 }
 
 

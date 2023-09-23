@@ -75,25 +75,24 @@
 
         <section class = "main-body">
             <div class="wrapper">
-                
-                <form action="currEmployees.html" id = "form" method="GET">
-                    
+                <form action="connect.php" id = "form" method="POST">
+                    <!-- ensure username and password comply with database information 
+                    then move user to currentemployees html-->
                     <h1>Login</h1>
 
                     <div class="input-box">
-                        <input type="text" placeholder="Username" id = "username" name = "username" required>
-                        
+                        <input type="text" placeholder="Username" id = "name" name = "username" required>
                     </div>
 
                     <div class="input-box">
                         <input type="password" placeholder="Password" id = "password" name = "password" required>
-                        <div id = "error"></div>
                     </div>
 
                     <div class="remember-forget">
                         <label><input type="checkbox">Remember Me</label><br>
                         <a href="#">Forget Login</a><br>        
-                        <!-- <a href="#">Create Login</a> -->  
+                        <!-- <a href="#">Create Login</a> -->
+
                     </div>
 
                     <button type="submit" class="btn">Submit</button>
@@ -113,6 +112,6 @@
             </ul>
         </footer>
 
-        <script src = "Scripts/login.js"></script>
+        <script src = "Scripts/index.js"></script>
     </body>
 </html>
