@@ -9,18 +9,14 @@ html {
 
 body {
     background : white;
-    margin: 0;
+
     line-height: 1.6;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-section {
-    padding: 1em 2em;
 }
     
 /* header */
 header {
-    background-color:#37ff00; /*abff35 */
+    background-color:#37ff00; 
     display: flex;
     justify-content: space-between;
 }
@@ -211,22 +207,37 @@ ul.dropdown li a:hover {
 
 .hamburger-button::before{top: 7px;}
 .hamburger-button::after{bottom: 7px;}
-
 /*nav toggle & hamburger end*/
   
-
-
-
 /*primary body start */
-.container {
-    width: 90%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    grid-gap: 20px;
-    justify-content: space-evenly;
+div.login-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 30px;
 }
 
-.pdf-button {
+div.container {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    overflow: scroll;
+    width: 80%;
+    margin: 15px 0;
+    align-items: center;
+}
+
+h1.login-headings{
+    margin: 15px 0;
+    background-color: black;
+    color: #FFF;
+    opacity: 70%;
+    text-align: center;
+    width: 80%;
+    text-underline-offset: none;
+}
+
+.pdf-button, .inservice-button {
     padding: 9px 25px;
     font-family: 'Courier New', Courier, monospace;
     background-color: rgb(112, 200, 230);
@@ -239,24 +250,17 @@ ul.dropdown li a:hover {
 }
 
 .inservice-button {
-    padding: 9px 25px;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(112, 200, 230);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
     transition: all 0.3s ease 0s;
-    font-weight: 502;
-    text-align: center;
     margin: 2px 0;
 }
 
-.docsub {
+.employee-resources {
+    width: 75%;
     text-align: center;
     font-size: larger;
 }
 
-.docsub a {
+.employee-resources a {
     text-decoration: none;
 }
 
@@ -278,34 +282,23 @@ h1::after {
     background-color: black ;
 }
 
-.box {
+div.box {
     height: 200px;
+    min-width: 180px;
     color: black;
     border: 2px solid black;
-    position: relative;
     display: flex;
     flex-direction: column;
     text-align: center;
     background: rgb(228, 228, 228);
     border-radius: 10px;
     border-style: none;
-    justify-content: space-between;
-}
-
-.box h2 {
+    justify-content: space-evenly;
     margin: 10px;
 }
 
-.box2 {
-    height: 200px;
-    color: black;
-    border: 2px solid black;
-    position: relative;
-    display: grid;
-    text-align: center;
-    background: rgb(228, 228, 228);
-    border-radius: 10px;
-    border-style: none;
+div.box h2 {
+    margin: 10px;
 }
 
 .h2 {

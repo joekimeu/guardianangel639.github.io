@@ -2,6 +2,8 @@
     margin: 0;
     padding: 0;
     --banner-color: #37ff00;
+    --txt-color: #FFF;
+    --background-color: rgb(112, 200, 230);
 }
 
 html {
@@ -215,13 +217,13 @@ ul.dropdown li a:hover {
 
 /*nav toggle & hamburger end*/
   
-
 .tempVert {
     padding: 15px 0;
-    color: black;
+    color: var(--txt-color);
     text-align: center;
-    background:rgb(112, 200, 230);
+    background:var(--background-color);
     background-size: cover;
+    font-size: larger;
 }
 
 .tempVert img {
@@ -234,12 +236,20 @@ ul.dropdown li a:hover {
     max-width: 100%;
 }
 
-.tempFirst, .tempFirst h3, .tempSecond, .tempSecond h3{
-    color: white
+.tempSecond {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    font-size: large;
 }
 
 .tempSecond li {
     list-style-type: none;
+}
+
+.tempSecond p {
+    max-width: 500px;
 }
 
 .infoDisplay {
@@ -248,13 +258,15 @@ ul.dropdown li a:hover {
     background: rgba(0, 0, 0, 0.6);
     opacity: 100%;
     margin: auto;
-    color: #FFF;
+    color: var(--txt-color);
     width: 60%;
+    display: flex;
+    flex-direction: column;
 }
 
 .infoDisplay p a{
     text-decoration: underline;
-    color: white;
+    color: var(--txt-color);
 }
 
 .infoDisplay p a:hover{
@@ -281,7 +293,7 @@ ul.dropdown li a:hover {
     position: relative;
     margin: 32px;
     overflow:hidden;
-    color: white;
+    color: var(--txt-color);
     border-radius: 30px;
     box-shadow: 0 0 0 0 rgba(143, 64, 248, 0.5), 0 0 0 0 rgba(39, 200, 255, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;

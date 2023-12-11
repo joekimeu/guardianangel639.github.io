@@ -213,37 +213,58 @@ ul.dropdown li a:hover {
 .hamburger-button::after{bottom: 7px;}
 
 /*nav toggle & hamburger end*/
-   
-
-
-
-
 
 /*primary body start */
 
-div.employee {
+div.primary {
+    background-color: white;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0 40px;
 }
 
-div.employee h1 {
+h1.primary-header{
+    margin: 15px 0;
+    background-color: black;
+    color: #FFF;
+    opacity: 70%;
+    text-align: center;
+    width: 80%;
+}
+
+div.why-gaha {
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    align-items: center;
+    width: 80%;
+}
+
+div.why-gaha h3 {
+    /* color: #375e97; */
+    color: #112C66;
+}
+
+h1.text-plea {
+    color: #112C66; 
+    margin-bottom: 0;
+}
+
+h3.text-application {
     color: black;
 }
 
-div.employee h3 {
-    color: #375e97;
-}
 
-div.employee h1.why {
+/* div.why-gaha {
     display: none;
-}
+} */
 
 @media screen and (max-width : 850px) {
-    div.employee h1.why {
+    div.why-gaha {
         display:flex;
     }
-    div.employee {
+    div.why-gaha {
         flex-direction: column;
         align-items: center;
         margin: 20px;
