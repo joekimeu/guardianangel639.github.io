@@ -8,7 +8,9 @@ html {
 }
 
 body {
-    background : white;
+    background-image: url(../Images/n-home.jpeg);
+    background-size: cover;
+    background-blend-mode: multiply;
     margin: 0;
     line-height: 1.6;
     font-family: Arial, Helvetica, sans-serif;
@@ -220,7 +222,7 @@ ul.dropdown li a:hover {
     background-image: white;
     text-align: center;
     align-items: center;
-    height: 40em;
+    height: 45em;
     display: flex;
     justify-content: center;
 }

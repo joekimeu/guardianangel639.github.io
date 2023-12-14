@@ -8,14 +8,14 @@ html {
 }
 
 body {
-    background : white;
+    background-image : url(../Images/mission-img.jpeg);
+    background-size: cover;
+    background-color: #FFF;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
     margin: 0;
     line-height: 1.6;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-section {
-    padding: 1em 2em;
 }
     
 /* header */
@@ -213,67 +213,51 @@ ul.dropdown li a:hover {
 .hamburger-button::after{bottom: 7px;}
 
 /*nav toggle & hamburger end*/
-  
-
-
 
 /*primary body start */
-.primary-body {
-    background-color: white;
-    background-size: cover;
-}
 
 .first-div {
-    margin: 20px auto;
+    margin: 40px auto 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1100px;
-
-}
-
-.first-div img {
-    max-width: 1100px;
-    height: auto;
+    color: white;
+    width: 80%;
+    background-color: black;
+    opacity: 80%;
+    border-radius: 5px;
+    font-size: larger;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0 25px;
 }
 
 .first-div h2 {
     margin: 15px 0;
-    background-color: black;
-    color: white;
-    opacity: 70%;
-    text-align: center;
 }
 
 .first-div-text i, b {
-    color: #375e97;
-}
-
-.first-div-text {
-    text-align: center;
-    font-size: large;
+    color: red;
 }
 
 .second-div-text{
-    margin: 0 2em;
-    text-align: center;
     display: flex;
-    justify-content: space-between;
-    font-size: large;
-}
-.second-div-text h3 {
-    color: #375e97;
+    justify-content: space-around;
+    margin-bottom: 40px;
 }
 
 .second-div-text div {
-    margin: 20px;
+    margin: 0 25px;
+}
+
+.second-div-text h3 {
+    color: red;
 }
 
 /*Ensuring that three columns are aligned and centered vertically as screen shrinks*/
 @media screen and (max-width: 750px) {
     .second-div-text {
         flex-direction: column;
-
     }
     .first-div {
         margin: 20px;
@@ -316,6 +300,7 @@ footer .menu li {
     font-size: 1em;
     padding: 12px 6px;
 }
+
 footer .first-item-footer {
     color: black;
 }

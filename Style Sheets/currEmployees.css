@@ -8,8 +8,11 @@ html {
 }
 
 body {
-    background : white;
-
+    background-image: url(../Images/n-home.jpeg);
+    background-size: cover;
+    background-color: #FFF;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
     line-height: 1.6;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -222,25 +225,29 @@ div.container {
     flex-direction:row;
     align-items: center;
     overflow: scroll;
-    width: 80%;
+    width: 75%;
     margin: 15px 0;
     align-items: center;
+    background-color: #FFF;
+    opacity: 85%;
+    font-weight: bold;
 }
 
 h1.login-headings{
     margin: 15px 0;
     background-color: black;
     color: #FFF;
-    opacity: 70%;
+    opacity: 85%;
     text-align: center;
     width: 80%;
-    text-underline-offset: none;
+    border-radius: 2.5px;
 }
 
 .pdf-button, .inservice-button {
     padding: 9px 25px;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(112, 200, 230);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: large;
+    background-color: rgb(240, 233, 233);
     border: none;
     border-radius: 50px;
     cursor: pointer;
@@ -258,40 +265,25 @@ h1.login-headings{
     width: 75%;
     text-align: center;
     font-size: larger;
+    background: white;
+    opacity: 75%;
 }
 
 .employee-resources a {
     text-decoration: none;
 }
 
-h1 {
-    width: max-content;
-    font-size: 36px;
-    position: relative;
-    cursor: pointer;
-    margin: 40px auto;
-}
-
-h1::after {
-    content: "";
-    position: absolute;
-    bottom: -5px;
-    height: 4px;
-    width: 100%;
-    left: 0;
-    background-color: black ;
-}
-
 div.box {
-    height: 200px;
+    height: 180px;
     min-width: 180px;
     color: black;
     border: 2px solid black;
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: rgb(228, 228, 228);
-    border-radius: 10px;
+    background:rgb(112, 200, 230);
+    /*  */
+    border-radius: 5px;
     border-style: none;
     justify-content: space-evenly;
     margin: 10px;

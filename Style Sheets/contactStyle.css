@@ -213,9 +213,6 @@ ul.dropdown li a:hover {
 .hamburger-button::after{bottom: 7px;}
 
 /*nav toggle & hamburger end*/
-  
-
-
 
 /*contact me page start*/
 .contact {
@@ -236,8 +233,8 @@ ul.dropdown li a:hover {
 
 .contact .content h2 {
     font-size: 36px;
-    font-weight: 500;
-    color: #3586ff;
+    font-weight: larger;
+    color: #37ff00;
 }
 
 .contact .content p {
@@ -275,6 +272,11 @@ ul.dropdown li a:hover {
     font-size: 22px;
 }
 
+.contact-headings {
+    font: larger;
+    color:#e91e63;
+}
+
 .container .contactInfo .box .text {
     display: flex;
     margin-left: 20px;
@@ -285,8 +287,8 @@ ul.dropdown li a:hover {
 }
 
 .container .contactInfo .box .text h3{
-    font-weight: 500;
-    color: #3586ff
+    font-size: larger;
+    color:#37ff00;
 }
 
 .contactForm {
@@ -297,7 +299,7 @@ ul.dropdown li a:hover {
 
 .contactForm h2 {
     font-size: 30px;
-    color: #333;
+    color:#333;
     font-weight: 500;
 }
 
@@ -341,7 +343,7 @@ ul.dropdown li a:hover {
 
 .contactForm .inputBox input[type="submit"] {
     width: 100px;
-    background: #00bcd4;
+    background: black;
     color: #FFF;
     border: none;
     cursor: pointer;

@@ -19,25 +19,31 @@ const password = document.getElementById('password');
 const form = document.getElementById('form');
 const errorElement = document.getElementById('error');
 
+fetch('./login.json')
+    .then(response => response.json())
+    .then(data => {
+        officalPassword = data.officalPassword
+        officalUsername = data.officalUsername
+    });
 
 form.addEventListener('submit', (e) => {
     let messages = [];
-    if (username.value != 'gahaemployee' && password.value != 'thankyouguys') {
+    if (username.value != officalUsername && password.value != officalPassword) {
         messages.push('Incorrect Username and Password');
         username.style.border ="3px solid red";
         password.style.border ="3px solid red";
         username.focus();
-        password.focus()
+        password.focus();
     }
 
-    else if (password.value != 'thankyouguys') {
+    else if (password.value != officalPassword) {
         messages.push('Incorrect Password');
         username.style.border = "";
         password.style.border ="3px solid red";
         password.focus();
     } 
   
-    else if (username.value != 'gahaemployee') {
+    else if (username.value != officalUsername) {
         messages.push('Incorrect Username');
         username.style.border ="3px solid red";
         password.style.border = "";

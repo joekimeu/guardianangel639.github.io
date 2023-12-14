@@ -23,6 +23,7 @@ header {
     background-color:#37ff00; /*abff35 */
     display: flex;
     justify-content: space-between;
+    margin-bottom: 0;
 }
 
 img {
@@ -221,7 +222,12 @@ div.primary {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0 40px;
+    margin: 0px 0 40px;
+}
+
+div.primary img.top-img {
+    min-width: 80%;
+    height: auto;
 }
 
 h1.primary-header{
@@ -239,6 +245,10 @@ div.why-gaha {
     font-size: larger;
     align-items: center;
     width: 80%;
+}
+
+div.why-gaha img {
+    margin-right: 50px;
 }
 
 div.why-gaha h3 {
@@ -264,17 +274,21 @@ h3.text-application {
     div.why-gaha {
         display:flex;
     }
+
     div.why-gaha {
         flex-direction: column;
         align-items: center;
-        margin: 20px;
+        margin: 20px auto;
         text-align: center;
     }
     .txt h1.why2 {
         display: none;
     }
     .image {
-        margin-bottom: 20px;
+        margin-bottom: 0 auto 20px;
+    }
+    h1.primary-header{ 
+        width: 100%;
     }
 }
 
