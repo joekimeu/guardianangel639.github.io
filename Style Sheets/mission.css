@@ -226,7 +226,7 @@ ul li:hover ul.dropdown {
 }
 
 .first-div-text i, b {
-    color: rgb(255,0,0);
+    color: var(--background-clr-primary);
 }
 
 .second-div-text{
@@ -240,7 +240,7 @@ ul li:hover ul.dropdown {
 }
 
 .second-div-text h3 {
-    color: rgb(255,0,0);
+    color: var(--background-clr-primary);
 }
 
 /*Ensuring that three columns are aligned and centered vertically as screen shrinks*/

@@ -216,7 +216,6 @@ div.primary-body {
 div.information, h1.operating-committee {
     background-color: #000;
     opacity: 80%;
-    
 }
 
 div.information {
@@ -233,13 +232,15 @@ div.information a {
 h1.operating-committee {
     text-align: center;
     width: 50%;
+    margin: 15px 0;
 }
 
 h1 {
-    color: rgb(255,0,0);
+    /* color: rgb(255,0,0); */
+    color: var(--background-clr-primary);
     font-size: 2em;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    border-bottom: 1px solid #375e97;
+    /* border-bottom: 1px solid #375e97; */
 }
 
 h2 {
