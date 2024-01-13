@@ -144,13 +144,15 @@ ul li:hover ul.dropdown {
 }
 
 .hamburger-toggle {
+    flex-direction: column;
+    justify-content: space-between;
     padding: .2em;
     background: transparent; 
     border: 0;
     cursor: pointer;
     position: absolute;
     right: 1em; 
-    margin: 2.67em 0 0 0; /* margin for hamburger to move down*/
+    margin: 3.25em 0 0 0; /* margin for hamburger to move down*/
     z-index: 1000;
 }
 

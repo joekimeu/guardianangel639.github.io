@@ -150,7 +150,7 @@ ul li:hover ul.dropdown {
     cursor: pointer;
     position: absolute;
     right: 1em; 
-    margin: 2.67em 0 0 0; /* margin for hamburger to move down*/
+    margin: 3.25em 0 0 0; /* margin for hamburger to move down*/
     z-index: 1000;
 }
 
