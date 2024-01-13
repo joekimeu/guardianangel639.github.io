@@ -80,7 +80,7 @@ ul li:hover ul.dropdown {
    display: block;
 }
 
-@media screen and (max-width : 950px) { /*change */
+@media screen and (max-width : 982px) { /*change */
     .nav__list li a {
         display: none;
     }
@@ -109,7 +109,7 @@ ul li:hover ul.dropdown {
 
 /* nav toggle / hamburger start*/
 
-@media screen and (min-width : 950px) { /*change */
+@media screen and (min-width : 982px) { /*change */
     .hamburger-toggle {
         display: none;
     }
