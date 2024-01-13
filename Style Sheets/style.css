@@ -152,7 +152,7 @@ ul li:hover ul.dropdown {
     cursor: pointer;
     position: absolute;
     right: 1em; 
-    margin: 3.25em 0 0 0; /* margin for hamburger to move down*/
+    margin: 49.32px 0 0 0; /* margin for hamburger to move down*/
     z-index: 1000;
 }
 
@@ -206,7 +206,8 @@ ul li:hover ul.dropdown {
 /*nav toggle & hamburger end*/
   
 .tempVert {
-    padding: 15px 0;
+    max-width: 768px; /*720px + (2*24px [24px for padding])*/
+    padding: 24px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -214,6 +215,7 @@ ul li:hover ul.dropdown {
     color: #FFF;
     border-radius: 5px;
     font-size: larger; 
+    margin: auto;
 }
 
 .tempVert img {
@@ -225,14 +227,14 @@ ul li:hover ul.dropdown {
 }
 
 .infoDisplay, .tempSecond {
-    width: 50%;
+    width: 100%;
     background-color: #000;
     opacity: 75%;
     margin: auto;
 }
 
 .tempSecond {
-    padding: 20px 10px;
+    padding: 20px 0;
 }
 
 .tempSecond li {
@@ -240,12 +242,13 @@ ul li:hover ul.dropdown {
 }
 
 .infoDisplay {
-    padding: 30px 10px;
+    padding: 30px 0;
     text-align: center;
     color: #FFF;
     display: flex;
     flex-direction: column;
-    
+    margin-top: 40px;
+   
 }
 
 .infoDisplay p a{
@@ -266,6 +269,7 @@ ul li:hover ul.dropdown {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .reach-out-button {
