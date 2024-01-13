@@ -26,9 +26,10 @@ body {
     
 /* header */
 header {
-    background-color:var(--background-clr-primary); 
+    background-color: var(--background-clr-primary); 
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 img {
@@ -150,7 +151,6 @@ ul li:hover ul.dropdown {
     cursor: pointer;
     position: absolute;
     right: 1em; 
-    margin: 3.25em 0 0 0; /* margin for hamburger to move down*/
     z-index: 1000;
 }
 
