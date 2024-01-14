@@ -286,7 +286,7 @@ div.why-gaha img {
     height: 100%;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 25px 0 5px;
     padding: 0;
     box-sizing: border-box;
 }
@@ -354,6 +354,9 @@ h2.text-plea {
     h1.primary-header{ 
         width: 100%;
     }
+}
+.txt {
+    align-items: center;
 }
 
 .txt a {
