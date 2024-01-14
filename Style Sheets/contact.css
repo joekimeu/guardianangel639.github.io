@@ -342,7 +342,7 @@ ul li:hover ul.dropdown {
     font-size: 10px;
 }
 
-@media (max-width: 991px) {
+@media screen and (max-width: 982px) {
     .contact {
         padding: 50px;
     }
