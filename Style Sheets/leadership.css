@@ -80,6 +80,10 @@ ul li:hover ul.dropdown {
     .nav__list li a {
         display: none;
     }
+    div.primary-body {
+        background: rgb(120, 198, 220);
+        background-image: none;
+    }
 }
 
 .nav__list li a {   
@@ -210,7 +214,6 @@ div.primary-body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 div.information, h1.operating-committee {
