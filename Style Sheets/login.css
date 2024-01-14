@@ -84,6 +84,9 @@ ul li:hover ul.dropdown {
     .nav__list li a {
         display: none;
     }
+    body {
+        background: #FFF;
+    }
 }
 
 .nav__list li a {   

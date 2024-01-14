@@ -5,7 +5,7 @@
 
 :root {
     --ff-primary : Arial, Helvetica, sans-serif;
-    --txt-clr-primary: #303030;
+    --txt-clr-primary: #000;
     --background-clr-primary: #00ff00;
 }
 
@@ -83,6 +83,9 @@ ul li:hover ul.dropdown {
 @media screen and (max-width : 982px) { /*change */
     .nav__list li a {
         display: none;
+    }
+    body {
+        background: #FFF;
     }
 }
 
@@ -215,10 +218,10 @@ div.container {
     flex-direction:row;
     align-items: center;
     overflow: scroll;
-    width: 75%;
+    width: 80%;
     margin: 15px 0;
     align-items: center;
-    background-color: #FFF;
+    background-color: var(--txt-clr-primary);
     opacity: 85%;
     font-weight: bold;
 }
@@ -251,7 +254,7 @@ h1.login-headings{
 }
 
 .employee-resources {
-    width: 75%;
+    width: 80%;
     text-align: center;
     font-size: larger;
     background: #FFF;
@@ -263,6 +266,7 @@ h1.login-headings{
 }
 
 div.box {
+    line-height: 1.2;
     height: 180px;
     min-width: 180px;
     border: 2px solid var(--txt-clr-primary);
@@ -274,6 +278,7 @@ div.box {
     border-style: none;
     justify-content: space-evenly;
     margin: 10px;
+    overflow-y: hidden;
 }
 
 div.box h2 {
