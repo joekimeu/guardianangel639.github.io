@@ -84,6 +84,9 @@ ul li:hover ul.dropdown {
     .nav__list li a {
         display: none;
     }
+    body {
+        background: rgb(120, 198, 220);
+    }
 }
 
 .nav__list li a {   
@@ -221,7 +224,7 @@ ul li:hover ul.dropdown {
 .tempVert img {
     width: 250px;
     border-radius: 50%;
-    margin: 40px auto;
+    margin: 40px auto 30px;
     display: block;
     max-width: 100%;
 }

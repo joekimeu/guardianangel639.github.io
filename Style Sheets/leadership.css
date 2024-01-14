@@ -16,11 +16,7 @@ html {
 }
 
 body {
-    background-image: url(../Images/mission-leadership.jpeg);
-    background-size: cover;
     background-color: #FFF;
-    background-attachment: fixed;
-    background-blend-mode: multiply;
     line-height: 1.6;
 }
     
@@ -205,15 +201,22 @@ ul li:hover ul.dropdown {
     
 /*primary body start */
 div.primary-body {
+    padding: 10px;
+    background-image: url(../Images/mission-leadership.jpeg);
+    background-size: cover;
+    background-color: #FFF;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
-    color: #FFF;
-    margin: auto;
+    
 }
 
 div.information, h1.operating-committee {
+    width: 80%;
+    color: #FFF;
+    margin: auto;
     background-color: #000;
     opacity: 80%;
 }
