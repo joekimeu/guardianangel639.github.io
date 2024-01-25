@@ -212,7 +212,7 @@ ul li:hover ul.dropdown {
     
 /*primary body start */
 div.primary-body {
-    max-width: 1068px; /*720px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
+    max-width: 1068px; /*1020px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
     padding: 24px;
     display: flex;
     margin: auto;
@@ -221,7 +221,6 @@ div.primary-body {
 }
 
 div.information, h1.operating-committee {
-    width: 80%;
     color: #FFF;
     margin: auto;
     background-color: rgb(0, 0, 0, 0.8);
@@ -270,8 +269,7 @@ div.primary-body a {
 
 div.primary-body a:hover {
     text-decoration: none;
-}
-    
+}  
 /* primary body end */
     
 /* footer start */

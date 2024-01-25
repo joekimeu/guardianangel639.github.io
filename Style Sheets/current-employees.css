@@ -22,6 +22,9 @@ body {
     background-attachment: fixed;
     background-blend-mode: multiply;
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
     
 /* header */
@@ -207,10 +210,17 @@ ul li:hover ul.dropdown {
   
 /*primary body start */
 div.login-body {
+    max-width: 1068px; /*1020px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
+    padding: 24px;
+    margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0 30px;
+}
+
+div.container, div.employee-resources, h1.login-headings {
+    max-width: 1020px;
+    padding: 10px;
 }
 
 div.container {
@@ -218,7 +228,6 @@ div.container {
     flex-direction:row;
     align-items: center;
     overflow: scroll;
-    width: 80%;
     margin: 15px 0;
     align-items: center;
     background-color: var(--txt-clr-primary);
@@ -232,7 +241,7 @@ h1.login-headings{
     color: #FFF;
     opacity: 85%;
     text-align: center;
-    width: 80%;
+    width: 100%;
     border-radius: 2.5px;
 }
 
@@ -254,11 +263,10 @@ h1.login-headings{
 }
 
 .employee-resources {
-    width: 80%;
     text-align: center;
     font-size: larger;
     background: #FFF;
-    opacity: 75%;
+    opacity: 85%;
 }
 
 .employee-resources a {
@@ -302,6 +310,7 @@ div.box h2 {
 
 /* footer start */
 footer {
+    margin-top: auto;
     background: var(--background-clr-primary);
     padding: 10px 30px;
     display: flex;
