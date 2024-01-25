@@ -208,6 +208,9 @@ ul li:hover ul.dropdown {
 
 /*primary body start */
 .main-body {
+    max-width: 768px; /*720px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
+    padding: 24px;
+    margin: auto;
     text-align: center;
     align-items: center;
     height: 45em;
@@ -216,6 +219,7 @@ ul li:hover ul.dropdown {
 }
 
 .wrapper {
+    max-width: 720px;
     margin-top: 20px;
     text-align: center;
     background-color: rgb(176, 236, 230);

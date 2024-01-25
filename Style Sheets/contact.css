@@ -209,9 +209,12 @@ ul li:hover ul.dropdown {
 
 /*contact me page start*/
 .contact {
+    max-width: 1068px;
+    padding: 24px;
+    margin: auto;
     position: relative;
     min-height: 100vh;
-    padding: 50px 100px;
+    /* padding: 50px 100px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -231,6 +234,10 @@ ul li:hover ul.dropdown {
 .contact .content p {
     font-weight: 300;
     color: #FFF;
+}
+
+.contact .container {
+    max-width: 1020px;
 }
 
 .container {

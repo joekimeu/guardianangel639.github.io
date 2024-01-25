@@ -209,6 +209,8 @@ ul li:hover ul.dropdown {
 /*primary body start */
 
 .first-div {
+    max-width: 1068px; /*720px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
+    padding: 24px;
     margin: 40px auto 20px;
     display: flex;
     flex-direction: column;
@@ -230,6 +232,10 @@ ul li:hover ul.dropdown {
 
 .first-div-text i, b {
     color: var(--background-clr-primary);
+}
+
+.first-div-text, .second-div-text {
+    max-width: 1020px;
 }
 
 .second-div-text{
