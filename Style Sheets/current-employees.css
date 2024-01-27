@@ -215,17 +215,22 @@ div.login-body {
     margin: auto;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    text-align: center;
     align-items: center;
 }
 
 div.container, div.employee-resources, h1.login-headings {
     max-width: 1020px;
+    width: 100%;
     padding: 10px;
+    text-align: center;
+    align-items: center;
 }
 
 div.container {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     align-items: center;
     overflow: scroll;
     margin: 15px 0;
