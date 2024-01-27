@@ -103,6 +103,10 @@ ul li:hover ul.dropdown {
     font-size: 0.95em;
 }
 
+.header-contact a{
+    font-weight: 550;
+}
+
 .header-contact:hover{
     opacity: 75%;
 }
