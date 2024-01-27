@@ -102,6 +102,10 @@ ul li:hover ul.dropdown {
     font-weight: 550;
 }
 
+.header-contact a{
+    font-weight: 550;
+}
+
 .header-contact:hover{
     opacity: 75%;
 }
@@ -208,7 +212,7 @@ ul li:hover ul.dropdown {
     margin: 0;
     padding: 0;
     width: 100%;
-    max-height: 500px;
+    max-height: 550px;
     overflow-y: hidden;
     position: relative;
 }
@@ -266,9 +270,20 @@ div.why-gaha h3,div.why-gaha p {
     margin: 0;  
 }
 
-div.why-gaha .txt {
+div.why-gaha div.txt {
+    margin: auto;
+    justify-content: center;
+}
+
+div.why-gaha div.txt a {
+    text-decoration: none;
+}
+
+div.why-gaha div.txt2 {
     text-align: center;
-    margin: 0 50px;
+    max-width: 600px;
+    justify-content: center;
+    align-items: center;
 }
 
 div.why-gaha h3 {
@@ -286,7 +301,7 @@ div.why-gaha img {
     height: 100%;
     align-items: center;
     justify-content: center;
-    margin: 25px 0 5px;
+    margin: 15px 0 5px;
     padding: 0;
     box-sizing: border-box;
 }
@@ -334,7 +349,6 @@ div.why-gaha img {
 }
 
 h2.text-plea {
-    margin-bottom: 0px;
     color: #112C66; 
     margin-bottom: 0;
 }
@@ -355,13 +369,8 @@ h2.text-plea {
         width: 100%;
     }
 }
-.txt {
-    align-items: center;
-}
 
-.txt a {
-    text-decoration: none;
-}
+
 /* primary body end */
 
 /* footer start */
