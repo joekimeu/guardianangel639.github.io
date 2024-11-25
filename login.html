@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <title>Guardian Angel Health Agency LLC</title>
+        <link rel = "stylesheet" href = "Sheets/login.css" type = "text/css">
+    </head>
+
+    <body>
+        <header>
+            <div class = "logo">
+                <a href="/"><img src = "Images/gaha-logo.png" alt = "Guardian Angel logo"></a>
+            </div>
+            <nav>
+                <ul class = "nav__list">
+                    
+                    <li> <a href = "#">Employees &#x25BE;</a>
+                        <ul class = "dropdown">
+                            <li><a href="login.html">Current</a></li>
+                            <li><a href="prospective-employees.html">Prospective</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li> <a href = "#">About Us &#x25BE;</a>
+                        <ul class = "dropdown">
+                            <li><a href="mission.html">Mission</a></li>
+                            <li><a href="leadership.html">Leadership</a></li>
+                        </ul>
+                    </li> 
+                    <li> <a href = "contact.html"><button class = "header-contact">Contact</button></a></li> 
+                </ul>
+            </nav>
+
+            <button class = "hamburger-toggle" aria-label="toggle navigation">
+                <span class = "hamburger-button"></span>
+            </button>
+            
+            <nav class = "hamburger">
+                <ul class = "hamburger__list">
+                    <li> <a href = "#">Employees &#x25BE;</a>
+                        <ul class = "dropdown">
+                            <li><a href="login.html">Current</a></li>
+                            <li><a href="prospective-employees.html">Prospective</a></li>
+                        </ul>
+                    </li>
+                    <li> <a href = "#">About Us &#x25BE;</a>
+                        <ul class = "dropdown">
+                            <li><a href="mission.html">Mission</a></li>
+                            <li><a href="leadership.html">Leadership</a></li>
+                        </ul>
+                        </li> 
+                    <li> <a href = "contact.html">Contact</a></li> 
+                </ul>
+            </nav>
+        </header>
+
+        <section class = "main-body">
+            <div class="wrapper">
+                
+                <form action="current-employees.html" id = "form" method="GET">
+
+                    <h1>Login</h1>
+
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" id = "username" name = "username" required>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" id = "password" name = "password" required>
+                        <div id = "error"></div>
+                    </div>
+
+                    <div class="remember-forget">
+                        <!-- <label><input type="checkbox">Remember Me</label><br>
+                        <a href="#">Forget Login</a><br> -->
+                        <!-- <a href="#">Create Login</a> -->  
+                    </div>
+
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- footer--> 
+        <footer>
+            <ul class = "menu">
+                <li class="first-item-footer"><strong>Guardian Angel Health Agency LLC © 2024</strong></li>
+                <li><a href="tel:6148683225">Telephone</a></li>
+                <li><a href="tel:6146224435">Cell Phone</a></li>
+                <li><a href="tel:6148683437">Fax</a></li>
+                <li><a href="mailto:office.manger@guardianangelha.com">Email</a></li>
+                <li><a href="https://maps.app.goo.gl/MiJcgQdAFgiwrknA7" target="_blank" rel="noopener noreferrer">Address</a></li>
+            </ul>
+        </footer>
+
+        <script src = "Scripts/login.js"></script>
+    </body>
+</html>
