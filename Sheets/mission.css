@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ff-primary : Arial, Helvetica, sans-serif;
+    --txt-clr-primary: #303030;
+    --background-clr-primary: #00ff00;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: var(--ff-primary);
+    color: var(--txt-clr-primary); 
+}
+
+body {
+    background-image: url(../Images/mission-leadership.jpeg);
+    background-size: cover;
+    background-color: #FFF;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+    
+/* header */
+header {
+    background-color: var(--background-clr-primary); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    max-width: 275px;
+    margin: auto auto auto 0;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li {
+    display: inline-block;
+    position: relative;
+    color: var(--txt-clr-primary);
+}
+
+ul li a {
+    display: block; 
+    padding: 25px;
+    color: var(--txt-clr-primary);
+    text-decoration: none;
+    text-align: center;
+}
+
+ul.dropdown li{
+    display: block;
+}
+
+ul.dropdown {
+    width: 100%;
+    background: var(--background-clr-primary);
+    position: absolute;
+    z-index: 999;
+    display: none; 
+}
+
+ul li a:hover {
+    background: var(--txt-clr-primary);
+    color: var(--background-clr-primary);
+}
+
+ul li:hover ul.dropdown {
+   display: block;
+}
+
+@media screen and (max-width : 982px) { /*change */
+    .nav__list li a {
+        display: none;
+    }
+    body {
+        background: rgb(120, 198, 220);
+    }
+}
+
+.nav__list li a {   
+    transition: all 0.3s ease 0s;
+    font-size: 2em;
+    font-weight: 550;
+    text-decoration: none;
+}
+
+.header-contact{
+    font-size: 0.95em;
+    padding: 9px 25px;
+    background-color: rgb(255, 255, 0);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 32px;
+    font-weight: 650;
+}
+
+.header-contact a{
+    font-weight: 550;
+}
+
+.header-contact:hover{
+    opacity: 75%;
+}
+
+/* nav toggle / hamburger start*/
+
+@media screen and (min-width : 982px) { /*change */
+    .hamburger-toggle {
+        display: none;
+    }
+}
+
+.hamburger {
+    position: fixed;
+    background: var(--background-clr-primary);
+    color: var(--txt-clr-primary);
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    z-index: 100;
+    transform: translateX(1000%);
+    transition: transform 250ms cubic-bezier(0.5, 0, .5, 1);
+}
+
+.hamburger__list {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0;
+    padding: 0; 
+}
+
+.hamburger__list a {
+    font-weight: bolder;
+    font-size: 35px;
+    text-decoration: none;
+}
+
+.hamburger-toggle {
+    padding: .2em;
+    background: transparent; 
+    border: 0;
+    cursor: pointer;
+    position: absolute;
+    right: 1em; 
+    z-index: 1000;
+}
+
+.hamburger-open .hamburger {
+    transform: translateX(0);
+}
+
+.hamburger-open .hamburger-toggle {
+    position: fixed;
+}
+
+.hamburger-open .hamburger-button {
+    transform: rotate(.625turn);
+}
+
+.hamburger-open .hamburger-button::before {
+    transform: rotate(90deg) translateX(-6px);
+}
+
+.hamburger-open .hamburger-button::after {
+    opacity: 0;
+} 
+
+.hamburger-button {
+    display: block;
+    position: relative; 
+
+}
+/* access to the three hamburger bars */
+
+.hamburger-button,
+.hamburger-button::before,
+.hamburger-button::after {
+    background: var(--txt-clr-primary);
+    width: 2.3em;
+    height: 3px;
+    border-radius: 1em;
+    transition: transform 250ms ease-in-out;
+}
+
+.hamburger-button::before,
+.hamburger-button::after{ 
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.hamburger-button::before{top: 7px;}
+.hamburger-button::after{bottom: 7px;}
+/*nav toggle & hamburger end*/
+
+/*primary body start */
+
+.first-div {
+    max-width: 1068px; /*720px + (2*24px [24px for padding]) + 2* 10px for tempsecond and infodisplay padding*/
+    padding: 24px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    background-color: rgb(0, 0, 0, 0.8);
+    border-radius: 5px;
+    font-size: larger;
+    font-weight: bolder;
+    align-items: center;
+}
+
+.first-div h2 {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.first-div-text i, b {
+    color: var(--background-clr-primary);
+}
+
+.first-div-text, .second-div-text {
+    max-width: 1020px;
+}
+
+.second-div-text{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.second-div-text div {
+    margin: 0 25px;
+}
+
+.second-div-text h3 {
+    color: var(--background-clr-primary);
+}
+
+/*Ensuring that three columns are aligned and centered vertically as screen shrinks*/
+@media screen and (max-width: 750px) {
+    .second-div-text {
+        flex-direction: column;
+    }
+    .first-div {
+        margin: 20px;
+    }
+    .second-div-text div{
+        margin-bottom: 10px;
+    }
+}
+
+.second-div-text ol li {
+    list-style-type: none;
+}
+
+/* primary body end */
+
+/* footer start */
+footer {
+    margin-top: auto;
+    background: var(--background-clr-primary);
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center; 
+    font-size: large;
+}
+
+footer .menu {
+    display: flex;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+footer .menu li {
+    list-style: none;
+    padding: 12px 6px;
+    font-size: 1.2em;
+    color: var(--txt-clr-primary);
+}
+
+footer .menu li a {
+    color: var(--txt-clr-primary);
+    margin: 0 3px;
+    padding: 12px 3px;
+    text-decoration: none;
+}
+
+footer .menu li a:hover {
+    color: var(--background-clr-primary);
+    background-color: var(--txt-clr-primary);
+}
+
+@media screen and (max-width : 747px) {
+    footer .menu {
+        display: grid;
+        text-align: center;
+    }
+    footer .menu li {
+        list-style: none;
+        padding: 0 6px;
+    }
+}
+/*footer end*/
