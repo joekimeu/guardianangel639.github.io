@@ -1,0 +1,20 @@
+
+/* Ensure the layout takes full viewport height */
+.app-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Let content grow to fill available space */
+.content {
+    flex: 1;
+}
+
+/* Footer styling */
+footer {
+    background-color: #212529; /* Example dark color for footer */
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}

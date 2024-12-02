@@ -1,0 +1,75 @@
+/* SignIn.css */
+
+/* Page Background */
+.signin-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+  }
+  
+  .dark-mode .signin-page {
+    background: linear-gradient(to right, #0f2027, #2c5364);
+  }
+  
+  /* Card Styling */
+  .signin-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .dark-mode .signin-card {
+    background-color: #333333;
+  }
+  
+  /* Title Styling */
+  .signin-title {
+    font-size: 1.8rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+  
+  /* Error Message Styling */
+  .signin-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  /* Button Styling */
+  .signin-button {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .signin-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Link Styling */
+  .signin-links .signin-link {
+    display: block;
+    color: #007bff;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  
+  .signin-links .signin-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  

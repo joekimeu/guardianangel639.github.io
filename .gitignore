@@ -1,0 +1,4 @@
+/server/node_modules
+server/.env
+front/node_modules
+front/build

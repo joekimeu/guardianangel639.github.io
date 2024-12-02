@@ -1,0 +1,173 @@
+/* Add top padding to account for fixed header height */
+/* global.css */
+
+/* Make Navbar fixed and add spacing below */
+.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050; /* Keeps it on top of other elements */
+  background-color: inherit;
+}
+
+/* Add padding to the body or main content to avoid overlap */
+body {
+  padding-top: 80px; /* Adjust based on your header's height */
+}
+
+
+/* Dark mode for the body */
+body.dark-mode {
+  background-color: #2d2d2d; /* Dark gray */
+  color: #ffffff;
+}
+  
+/* Background color for cards in dark and light mode */
+.card-dark {
+  background-color: #3a3a3a; /* Slightly lighter dark for cards */
+  color: #ffffff;
+}
+.card-light {
+  background-color: #f8f9fa !important;
+  color: #000000 !important;
+}
+
+/* Styles for the Offcanvas close button in light and dark modes */
+.offcanvas-close-dark .btn-close {
+  filter: invert(1); /* Makes the close button white */
+}
+
+.offcanvas-close-light .btn-close {
+  filter: invert(0); /* Makes the close button dark */
+}
+
+/* Global styles for footer */
+.bg-dark {
+  background-color: #333333 !important;
+}
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+.text-dark {
+  color: #000000 !important;
+}
+.text-white {
+  color: #ffffff !important;
+}
+
+/* Text styling */
+.large-title {
+  font-size: 2.5rem;
+  color: #007bff;
+}
+.section-title {
+  font-size: 2rem;
+  color: #007bff;
+}
+.main-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+}
+.footer-dark {
+  background-color: #2d2d2d; /* Match footer background with header */
+  color: #ffffff;
+}
+
+/* Other dark mode elements */
+a.dark-mode-link {
+  color: #85d7ff;
+}
+a.light-mode-link {
+  color: #007bff;
+}
+a:hover {
+  text-decoration: underline;
+}
+  
+  /* Form field styling */
+.form-control-dark {
+  background-color: #333333;
+  color: #ffffff;
+  border-color: #555555;
+}
+.form-control-light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Button styling */
+.btn-success {
+  color: #ffffff;
+  background-color: #28a745;
+  border-color: #28a745;
+}
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Dark mode for links */
+a.dark-mode-link:hover {
+  color: #aad7ff;
+}
+
+/* global.css */
+
+body, h2 {
+  font-family: Arial, sans-serif;
+}
+
+.table-responsive {
+  max-width: 100%;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.table th, .table td {
+  font-size: 1.1rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* global.css */
+
+body, h2 {
+  font-family: Arial, sans-serif;
+}
+
+.form-control, .form-label {
+  font-size: 1.1rem;
+}
+
+h2 {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.w-50 {
+  max-width: 100%;
+}
+
+.bg-dark .form-label, .bg-dark .form-control {
+  color: #ffffff;
+}
+
+.btn-success {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+}
+

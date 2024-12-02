@@ -1,0 +1,69 @@
+/* Contact.css */
+
+/* Page Background */
+.contact-page {
+    min-height: 100vh;
+    padding-top: 50px;
+    background: linear-gradient(to bottom, #2a5298, #1e3c72); /* Inviting gradient background */
+  }
+  
+  .dark-mode .contact-page {
+    background: linear-gradient(to bottom, #0f2027, #2c5364);
+  }
+  
+  /* Page Title Styling */
+  .page-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 2rem;
+  }
+  
+  /* Contact Card Styling */
+  .contact-card {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+    border: none;
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .contact-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Contact Info Styling */
+  .contact-info {
+    font-size: 1.2rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-link {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .contact-link:hover {
+    color: #0056b3;
+  }
+  
+  /* Button Styling */
+  .send-button {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .send-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+  

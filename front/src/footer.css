@@ -1,0 +1,45 @@
+/* footer.css */
+
+/* Footer background and text color for light and dark modes */
+.footer-dark {
+    background-color: #212529; /* Dark background to match header dark mode */
+    color: #ffffff;
+  }
+  
+  .footer-light {
+    background-color: #ffffff; /* Light background to match header light mode */
+    color: #212529;
+  }
+  
+  /* Footer link styles */
+  .footer-link {
+    color: #28a745; /* Green color for footer links to match header button outline */
+    text-decoration: none;
+  }
+  
+  .footer-link:hover,
+  .footer-link:focus {
+    color: #ffffff; /* White color on hover in dark mode */
+    text-decoration: underline;
+  }
+  
+  /* Footer padding and font size */
+  .footer-content {
+    padding: 20px; /* Adjust padding as needed */
+    font-size: 1.2rem; /* Slightly larger font size for readability */
+    text-align: center; /* Center text */
+  }
+  
+  /* Footer button style similar to header custom button */
+  .footer-button {
+    font-size: 1.2rem;
+    color: #28a745; /* Green text */
+    border-color: #28a745; /* Green border */
+  }
+  
+  .footer-button:hover,
+  .footer-button:focus {
+    background-color: #28a745; /* Green background on hover/focus */
+    color: #ffffff; /* White text for contrast */
+  }
+  

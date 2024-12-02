@@ -1,0 +1,75 @@
+/* OperatingCommittee.css */
+
+/* Background and Page Styling */
+.committee-page {
+    min-height: 100vh;
+    background: linear-gradient(to right, #283c86, #45a247); /* Gradient background */
+    padding-top: 50px;
+    color: #ffffff;
+  }
+  
+  .dark-mode .committee-page {
+    background: linear-gradient(to right, #0f2027, #2c5364);
+  }
+  
+  /* Page Title */
+  .page-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    margin-bottom: 3rem;
+  }
+  
+  /* Committee Card Styling */
+  .committee-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 30px;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .committee-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Card Title and Role Styling */
+  .committee-title {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .committee-role {
+    font-style:normal;
+    font-size: 1.25rem;
+    color: #0f2027;
+    margin: 10px 0;
+  }
+  
+  /* Card Description Styling */
+  .committee-description {
+    font-size: 1.2rem;
+    color: #333333;
+    line-height: 1.5;
+    text-align: left;
+  }
+  
+  /* Contact Information Styling */
+  .contact-info {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .contact-link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  

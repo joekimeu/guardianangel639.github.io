@@ -1,0 +1,136 @@
+/* Header.css */
+
+/* Custom button style for green outline and larger font */
+.custom-button {
+  font-size: 1.2rem;
+  color: #28a745; /* Green text */
+  border-color: #28a745; /* Green border */
+}
+
+.menu-options .menu-option-item {
+  font-size: 1.5rem; /* Increase font size */
+  margin-bottom: 1.5rem; /* Increase spacing between options */
+  text-align: left;
+}
+
+.menu-options .menu-option-item:hover {
+  text-decoration: underline;
+}
+
+.custom-button:hover,
+.custom-button:focus {
+  background-color: #28a745; /* Green background on hover/focus */
+  color: #ffffff; /* White text for contrast */
+}
+
+/* Menu options styling */
+.menu-options .menu-option-item {
+  font-size: 1.5rem; /* Increase font size */
+  margin-bottom: 1.5rem; /* Increase spacing between options */
+}
+
+.menu-options .menu-option-item:hover {
+  text-decoration: underline;
+}
+
+
+/* Overlay title styling */
+.overlay-title {
+  font-size: 3rem; /* Increase font size for the menu title */
+}
+
+/* Styles for the Offcanvas close button in light and dark modes */
+.offcanvas-close-dark .btn-close {
+  filter: invert(1); /* Makes the close button white */
+}
+
+.offcanvas-close-light .btn-close {
+  filter: invert(0); /* Makes the close button dark */
+}
+
+/* Overlay text styling */
+.overlay-text .nav-link {
+  font-size: 2rem; /* Increase font size for menu options */
+  margin: 0.5rem 0; /* Add spacing between items */
+}
+
+/* Offcanvas light and dark mode styling */
+.dark-overlay {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.light-overlay {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Custom button style for green outline and larger font */
+.custom-button {
+  font-size: 1.2rem;
+  color: #28a745; /* Green text */
+  border-color: #28a745; /* Green border */
+}
+
+.custom-button:hover,
+.custom-button:focus {
+  background-color: #28a745; /* Green background on hover/focus */
+  color: #ffffff; /* White text for contrast */
+}
+
+/* Menu options styling */
+.menu-options.align-left {
+  text-align: left;
+  padding-left: 20px; /* Adjust as needed for spacing from the left */
+}
+
+.menu-options .menu-option-item {
+  font-size: 1.5rem; /* Increase font size */
+  color: var(--menu-color); /* Dynamic color based on theme */
+  margin-bottom: 1.5rem; /* Increase spacing between options */
+}
+
+.menu-options .menu-option-item:hover {
+  color: #28a745; /* Hover color to match button */
+  text-decoration: underline;
+}
+
+/* Light and dark theme variables */
+:root {
+  --menu-color-light: #333; /* Darker color for light mode */
+  --menu-color-dark: #bbbbbb; /* Lighter color for dark mode */
+}
+
+.light-theme .menu-option-item {
+  color: var(--menu-color-light);
+}
+
+.dark-theme .menu-option-item {
+  color: var(--menu-color-dark);
+}
+
+/* Offcanvas styling */
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the left */
+}
+
+/* Full-width search bar within the Offcanvas menu */
+.offcanvas-body .search-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.offcanvas-body .search-form .form-control {
+  flex: 1;
+  border-radius: 0; /* Optional: Removes rounded edges for a cleaner look */
+}
+
+.offcanvas-body .search-form .btn {
+  margin-left: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+}
