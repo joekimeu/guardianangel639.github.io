@@ -10,11 +10,10 @@ import ClockInOut from './clockinout';
 import Missing from './missing';
 import Unauthorized from './unauthorized';
 import Layout from './layout';
-import SearchResults from './searchResults'
-import Default from './default';
+import SearchResults from './searchResults';
 import { AuthContext } from './context/AuthProvider';
-import PunchHistory from './punchHistory'; 
-import { jwtDecode } from 'jwt-decode';
+import PunchHistory from './punchHistory';
+import {jwtDecode} from 'jwt-decode';
 import About from './about';
 import OperatingCommittee from './operatingCommitte';
 import Trainings from './trainings';
@@ -52,7 +51,7 @@ export default function App() {
         {auth.token ? (
           employeeUsername === "annemulama" ? (
             <>
-              <Route path="/home" element={<Home />} />
+              <Route path="/" element={<Home />} />
               <Route path="/create" element={<Create />} />
               <Route path="/punchhistory/:username" element={<PunchHistory />} />
               <Route path="/read/:username" element={<Read />} />
