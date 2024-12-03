@@ -58,7 +58,7 @@ export default function Prospective() {
             </Card>
 
             <div className="text-center mt-4 mb-5"> {/* Add mb-5 for margin-bottom */}
-              <Button variant="success" href="#application" className="apply-button">
+              <Button variant="success" href="https://docs.google.com/forms/d/1ysGSrwvE55hwn0Jq2o7dZuOX19mUkJCeeNYBW1moI4Y/edit" className="apply-button">
                 Apply Now!
               </Button>
             </div>

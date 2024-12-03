@@ -22,10 +22,10 @@ export default function Contact() {
     e.preventDefault();
 
     emailjs.send(
-      'YOUR_SERVICE_ID', // Replace with your EmailJS service ID
-      'YOUR_TEMPLATE_ID', // Replace with your EmailJS template ID
+      'service_8s8jltp', // Replace with your EmailJS service ID
+      'template_dp8mqgr', // Replace with your EmailJS template ID
       formData,
-      'YOUR_USER_ID' // Replace with your EmailJS user ID
+      'tyyCV9g6FoxoNQZ0s'
     ).then((result) => {
       alert('Message sent successfully!');
     }, (error) => {
