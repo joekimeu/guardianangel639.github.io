@@ -43,9 +43,9 @@ export default function AllUsers() {
                     <td>{employee.lastname}</td>
                     <td>{employee.position}</td>
                     <td>
-                        <Link to={'/read/' + employee.username} className="btn btn-info btn-sm me-2">Read</Link>
-                        <Link to={'/edit/' + employee.username} className="btn btn-primary btn-sm me-2">Edit</Link>
-                        <Link to={'/clockinout/' + employee.username} className="btn btn-secondary btn-sm me-2">Punchcard</Link>
+                        <Link to={'#/read/' + employee.username} className="btn btn-info btn-sm me-2">Read</Link>
+                        <Link to={'#/edit/' + employee.username} className="btn btn-primary btn-sm me-2">Edit</Link>
+                        <Link to={'#/clockinout/' + employee.username} className="btn btn-secondary btn-sm me-2">Punchcard</Link>
                         <button onClick={() => handleDelete(employee.username)} className="btn btn-danger btn-sm">Delete</button>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@ export default function AllUsers() {
         <div className={`d-flex flex-column min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} p-5`}>
             <div className="d-flex justify-content-between align-items-center mb-4" style={{ fontSize: '2rem' }}>
                 <h2>Employee List</h2>
-                <Link to="./create" className="btn btn-success btn-lg">Create +</Link>
+                <Link to="#/create" className="btn btn-success btn-lg">Create +</Link>
             </div>
             <div className={`table-responsive rounded shadow-lg p-4 ${darkMode ? 'bg-dark text-light' : 'bg-white'}`}>
                 <table className={`table ${darkMode ? 'table-dark' : 'table-light'} table-hover table-bordered`}>

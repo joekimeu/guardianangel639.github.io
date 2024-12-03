@@ -61,11 +61,31 @@ const ClockInOut = () => {
         }
     };
 
+    const formatDate = (dateString) => {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    };
+
+    const formatTime = (timeString) => {
+        if (!timeString) return 'N/A';
+        const time = new Date(`2000-01-01T${timeString}`);
+        return time.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        });
+    };
+
     const calculateDuration = (start, end) => {
         if (!start || !end) return 'N/A';
         const startTime = new Date(`2000-01-01T${start}`);
         const endTime = new Date(`2000-01-01T${end}`);
-        const duration = (endTime - startTime) / 1000 / 60;
+        const duration = (endTime - startTime) / 1000 / 60; // duration in minutes
         const hours = Math.floor(duration / 60);
         const minutes = Math.round(duration % 60);
         return `${hours}h ${minutes}m`;
@@ -77,16 +97,32 @@ const ClockInOut = () => {
             {error && <div className="alert alert-danger text-center">{error}</div>}
             {message && <div className="alert alert-success text-center">{message}</div>}
             <div className="button-group mb-3 text-center">
-                <button className="btn btn-success me-2" onClick={() => handleAction('clockin')} disabled={loading || (currentStatus && !currentStatus.clockout_time)}>
+                <button
+                    className="btn btn-success me-2"
+                    onClick={() => handleAction('clockin')}
+                    disabled={loading || (currentStatus && !currentStatus.clockout_time)}
+                >
                     Clock In
                 </button>
-                <button className="btn btn-warning me-2" onClick={() => handleAction('lunchstart')} disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end) || (currentStatus.lunch_start && currentStatus.lunch_end)}>
+                <button
+                    className="btn btn-warning me-2"
+                    onClick={() => handleAction('lunchstart')}
+                    disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end)}
+                >
                     Start Lunch
                 </button>
-                <button className="btn btn-info me-2" onClick={() => handleAction('lunchend')} disabled={loading || !currentStatus || !currentStatus.lunch_start || currentStatus.lunch_end}>
+                <button
+                    className="btn btn-info me-2"
+                    onClick={() => handleAction('lunchend')}
+                    disabled={loading || !currentStatus || !currentStatus.lunch_start || currentStatus.lunch_end}
+                >
                     End Lunch
                 </button>
-                <button className="btn btn-danger" onClick={() => handleAction('clockout')} disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end)}>
+                <button
+                    className="btn btn-danger"
+                    onClick={() => handleAction('clockout')}
+                    disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end)}
+                >
                     Clock Out
                 </button>
             </div>
@@ -107,11 +143,11 @@ const ClockInOut = () => {
                     <tbody>
                         {history.map((entry, index) => (
                             <tr key={index}>
-                                <td>{entry.date}</td>
-                                <td>{entry.clockin_time}</td>
-                                <td>{entry.lunch_start || 'N/A'}</td>
-                                <td>{entry.lunch_end || 'N/A'}</td>
-                                <td>{entry.clockout_time || 'N/A'}</td>
+                                <td>{formatDate(entry.date)}</td>
+                                <td>{formatTime(entry.clockin_time)}</td>
+                                <td>{formatTime(entry.lunch_start)}</td>
+                                <td>{formatTime(entry.lunch_end)}</td>
+                                <td>{formatTime(entry.clockout_time)}</td>
                                 <td>{calculateDuration(entry.clockin_time, entry.clockout_time)}</td>
                                 <td>{calculateDuration(entry.lunch_start, entry.lunch_end)}</td>
                             </tr>

@@ -9,13 +9,12 @@ const PunchHistory = () => {
     const { username } = useParams();
     const { auth } = useContext(AuthContext);
     const [history, setHistory] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { darkMode } = useContext(DarkModeContext);
-    
+
     const fetchHistory = async () => {
         try {
-            const res = await axios.get('https://gaha-website-c6534f8cf004.herokuapp.com/clockhistory/' + username, {
+            const res = await axios.get(`https://gaha-website-c6534f8cf004.herokuapp.com/clockhistory/${username}`, {
                 headers: { Authorization: auth.token }
             });
             setHistory(res.data);
@@ -28,6 +27,26 @@ const PunchHistory = () => {
         fetchHistory();
     }, []);
 
+    const formatDate = (dateString) => {
+        if (!dateString) return 'N/A';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    };
+
+    const formatTime = (timeString) => {
+        if (!timeString) return 'N/A';
+        const time = new Date(`2000-01-01T${timeString}`);
+        return time.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true,
+        });
+    };
+
     const calculateDuration = (start, end) => {
         if (!start || !end) return 'N/A';
         const startTime = new Date(`2000-01-01T${start}`);
@@ -38,10 +57,9 @@ const PunchHistory = () => {
         return `${hours}h ${minutes}m`;
     };
 
-
-    return  (
+    return (
         <div className="container mt-5">
-                        <h3 className="mt-5">History</h3>
+            <h3 className="mt-5">History</h3>
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -57,33 +75,22 @@ const PunchHistory = () => {
                 <tbody>
                     {history.map((entry, index) => (
                         <tr key={index}>
-                            <td>{entry.date}</td>
-                            <td>{entry.clockin_time}</td>
-                            <td>{entry.lunch_start || 'N/A'}</td>
-                            <td>{entry.lunch_end || 'N/A'}</td>
-                            <td>{entry.clockout_time || 'N/A'}</td>
-                            <td>
-                                {calculateDuration(
-                                    entry.clockin_time,
-                                    entry.clockout_time
-                                )}
-                            </td>
-                            <td>
-                                {calculateDuration(
-                                    entry.lunch_start,
-                                    entry.lunch_end
-                                )}
-                            </td>
+                            <td>{formatDate(entry.date)}</td>
+                            <td>{formatTime(entry.clockin_time)}</td>
+                            <td>{formatTime(entry.lunch_start)}</td>
+                            <td>{formatTime(entry.lunch_end)}</td>
+                            <td>{formatTime(entry.clockout_time)}</td>
+                            <td>{calculateDuration(entry.clockin_time, entry.clockout_time)}</td>
+                            <td>{calculateDuration(entry.lunch_start, entry.lunch_end)}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <div className='d-flex justify-content-between mt-3'>
-                    <Link to="/home" className='btn btn-info'>Back</Link>
-                </div>
+            <div className="d-flex justify-content-between mt-3">
+                <Link to="#/home" className="btn btn-info">Back</Link>
+            </div>
         </div>
-    )
-
-}
+    );
+};
 
 export default PunchHistory;

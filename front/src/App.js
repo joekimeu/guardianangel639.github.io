@@ -20,7 +20,6 @@ import Trainings from './trainings';
 import Prospective from './prospective';
 import Contact from './contact';
 import QRCodeDisplay from './qrCodeDisplay';
-import Sample from './sample';
 import React, { useContext, useEffect } from 'react';
 import { DarkModeContext } from './DarkModeContext';
 import './global.css';
@@ -79,7 +78,6 @@ export default function App() {
         )}
 
         {/* Public routes */}
-        <Route exact path="/sample" element={<Sample />} />
         <Route exact path="/" element={<About />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/unauthorized" element={<Unauthorized />} />

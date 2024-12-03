@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { DarkModeContext } from './DarkModeContext';
 import './global.css';
-import { useContext } from 'react';
 
 export default function Read() {
     const { username } = useParams();
     const [employee, setEmployee] = useState({});
+    const { darkMode } = useContext(DarkModeContext);
 
     useEffect(() => {
         axios.get('https://gaha-website-c6534f8cf004.herokuapp.com/read/' + username)
@@ -18,13 +18,19 @@ export default function Read() {
             .catch(err => console.log(err));
     }, [username]);
 
-    const { darkMode } = useContext(DarkModeContext);
-
     return (
-        <div className='d-flex vh-100 bg-light justify-content-center align-items-center'>
-            <div className='w-auto bg-white rounded p-4 shadow'>
+        <div
+            className={`d-flex vh-100 justify-content-center align-items-center ${
+                darkMode ? 'bg-dark text-white' : 'bg-light text-dark'
+            }`}
+        >
+            <div
+                className={`w-auto rounded p-4 shadow ${
+                    darkMode ? 'card-dark' : 'card-light'
+                }`}
+            >
                 <h2 className='mb-4'>{employee.firstname}'s Information</h2>
-                <table className='table'>
+                <table className={`table ${darkMode ? 'table-dark' : 'table-light'}`}>
                     <tbody>
                         <tr>
                             <th>Username:</th>
@@ -53,8 +59,15 @@ export default function Read() {
                     </tbody>
                 </table>
                 <div className='d-flex justify-content-between mt-3'>
-                    <Link to="/home" className='btn btn-info'>Back</Link>
-                    <Link to={"/edit/" + employee.username} className='btn btn-primary'>Edit</Link>
+                    <Link to="#/home" className={`btn btn-${darkMode ? 'light' : 'info'}`}>
+                        Back
+                    </Link>
+                    <Link
+                        to={`#/edit/${employee.username}`}
+                        className={`btn btn-${darkMode ? 'secondary' : 'primary'}`}
+                    >
+                        Edit
+                    </Link>
                 </div>
             </div>
         </div>

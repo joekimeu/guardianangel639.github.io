@@ -31,16 +31,23 @@ export default function Header() {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
+      setShowMenu(false); // Close menu after search
     }
   };
 
   const handleLogout = () => {
     logout();
     navigate('/signin');
+    setShowMenu(false); // Close menu on logout
   };
 
   const handleMenuToggle = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleLinkClick = (path) => {
+    setShowMenu(false); // Close menu on link click
+    navigate(path);
   };
 
   let employeeUsername = null;
@@ -98,31 +105,31 @@ export default function Header() {
         </Offcanvas.Header>
         <Offcanvas.Body className={`${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} align-left`}>
           <Nav className="flex-column menu-options align-left">
-            <Nav.Link href="/operatingcommittee" className="menu-option-item">Leadership</Nav.Link>
-            <Nav.Link href="/prospective" className="menu-option-item">Prospective</Nav.Link>
-            <Nav.Link href="/contact" className="menu-option-item">Contact</Nav.Link>
+            <Nav.Link onClick={() => handleLinkClick('/operatingcommittee')} className="menu-option-item">Leadership</Nav.Link>
+            <Nav.Link onClick={() => handleLinkClick('/prospective')} className="menu-option-item">Prospective</Nav.Link>
+            <Nav.Link onClick={() => handleLinkClick('/contact')} className="menu-option-item">Contact</Nav.Link>
             {auth.token ? (
               <>
                 {employeeUsername !== "gahaemployee" && (
                   <>
-                    <Nav.Link href={`/edit/${employeeUsername}`} className="menu-option-item">Profile</Nav.Link>
-                    <Nav.Link href="/clockinout" className="menu-option-item">Punchcard</Nav.Link>
+                    <Nav.Link onClick={() => handleLinkClick(`/edit/${employeeUsername}`)} className="menu-option-item">Profile</Nav.Link>
+                    <Nav.Link onClick={() => handleLinkClick('/clockinout')} className="menu-option-item">Punchcard</Nav.Link>
                   </>
                 )}
                 {employeeUsername === "annemulama" && (
                   <NavDropdown title="Admin Options" className={`${darkMode ? 'text-white' : 'text-dark'} menu-option-item`}>
-                    <NavDropdown.Item href="/home">All Users</NavDropdown.Item>
-                    <NavDropdown.Item href="/create">Make New User</NavDropdown.Item>
-                    <NavDropdown.Item href="/trainings">Trainings</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLinkClick('/home')}>All Users</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLinkClick('/create')}>Make New User</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => handleLinkClick('/trainings')}>Trainings</NavDropdown.Item>
                   </NavDropdown>
                 )}
                 {employeeUsername === "gahaemployee" && (
-                  <Nav.Link href="/trainings" className="menu-option-item">Trainings</Nav.Link>
+                  <Nav.Link onClick={() => handleLinkClick('/trainings')} className="menu-option-item">Trainings</Nav.Link>
                 )}
                 <Nav.Link onClick={handleLogout} className="menu-option-item">Logout</Nav.Link>
               </>
             ) : (
-              <Nav.Link href="/signin" className="menu-option-item">Sign In</Nav.Link>
+              <Nav.Link onClick={() => handleLinkClick('/signin')} className="menu-option-item">Sign In</Nav.Link>
             )}
           </Nav>
           <Form className="search-form" onSubmit={handleSearch}>
@@ -136,7 +143,6 @@ export default function Header() {
             />
             <Button variant="outline-success" type="submit">Search</Button>
           </Form>
-
         </Offcanvas.Body>
       </Offcanvas>
     </>

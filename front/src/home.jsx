@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { DarkModeContext } from './DarkModeContext';
 import './global.css';
-import { useContext } from 'react';
 
 export default function Home() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { darkMode } = useContext(DarkModeContext);
 
     // Fetch employees from server
     useEffect(() => {
@@ -62,9 +59,9 @@ export default function Home() {
                     <td>{employee.lastname}</td>
                     <td>{employee.position}</td>
                     <td>
-                        <Link to={'/read/' + employee.username} className='btn btn-sm btn-info me-2'>Read</Link>
-                        <Link to={'/edit/' + employee.username} className='btn btn-sm btn-primary me-2'>Edit</Link>
-                        <Link to={'/punchhistory/' + employee.username} className='btn btn-sm btn-secondary me-2'>Punchcard</Link>
+                        <Link to={'#/read/' + employee.username} className='btn btn-sm btn-info me-2'>Read</Link>
+                        <Link to={'#/edit/' + employee.username} className='btn btn-sm btn-primary me-2'>Edit</Link>
+                        <Link to={'#/punchhistory/' + employee.username} className='btn btn-sm btn-secondary me-2'>Punchcard</Link>
                         <button onClick={() => handleDelete(employee.username)} className='btn btn-sm btn-danger'>Delete</button>
                     </td>
                 </tr>
@@ -80,7 +77,7 @@ export default function Home() {
         <div className='container mt-5'>
             <h2 className='mb-4'>Employee List</h2>
             <div className='d-flex justify-content-end mb-3'>
-                <Link to="/create" className="btn btn-success">Create +</Link>
+                <Link to="#/create" className="btn btn-success">Create +</Link>
             </div>
             <div className='table-responsive'>
                 <table className='table table-striped table-hover'>
