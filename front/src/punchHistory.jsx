@@ -87,7 +87,7 @@ const PunchHistory = () => {
                 </tbody>
             </table>
             <div className="d-flex justify-content-between mt-3">
-                <Link to="#/home" className="btn btn-info">Back</Link>
+                <Link to="/home" className="btn btn-info">Back</Link>
             </div>
         </div>
     );

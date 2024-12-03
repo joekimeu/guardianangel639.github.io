@@ -59,9 +59,9 @@ export default function Home() {
                     <td>{employee.lastname}</td>
                     <td>{employee.position}</td>
                     <td>
-                        <Link to={'#/read/' + employee.username} className='btn btn-sm btn-info me-2'>Read</Link>
-                        <Link to={'#/edit/' + employee.username} className='btn btn-sm btn-primary me-2'>Edit</Link>
-                        <Link to={'#/punchhistory/' + employee.username} className='btn btn-sm btn-secondary me-2'>Punchcard</Link>
+                        <Link to={'/read/' + employee.username} className='btn btn-sm btn-info me-2'>Read</Link>
+                        <Link to={'/edit/' + employee.username} className='btn btn-sm btn-primary me-2'>Edit</Link>
+                        <Link to={'/punchhistory/' + employee.username} className='btn btn-sm btn-secondary me-2'>Punchcard</Link>
                         <button onClick={() => handleDelete(employee.username)} className='btn btn-sm btn-danger'>Delete</button>
                     </td>
                 </tr>

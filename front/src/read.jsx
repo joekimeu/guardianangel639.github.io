@@ -59,11 +59,11 @@ export default function Read() {
                     </tbody>
                 </table>
                 <div className='d-flex justify-content-between mt-3'>
-                    <Link to="#/home" className={`btn btn-${darkMode ? 'light' : 'info'}`}>
+                    <Link to="/home" className={`btn btn-${darkMode ? 'light' : 'info'}`}>
                         Back
                     </Link>
                     <Link
-                        to={`#/edit/${employee.username}`}
+                        to={`/edit/${employee.username}`}
                         className={`btn btn-${darkMode ? 'secondary' : 'primary'}`}
                     >
                         Edit

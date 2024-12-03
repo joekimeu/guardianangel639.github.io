@@ -27,7 +27,7 @@ export default function SignIn() {
       const res = await axios.post('https://gaha-website-c6534f8cf004.herokuapp.com/signin', data);
       if (res.data.token) {
         login(res.data.token);
-        navigate('#/about');
+        navigate('/about');
       } else {
         setError("Failed to sign in: No token received");
       }
@@ -73,8 +73,8 @@ export default function SignIn() {
           </button>
         </form>
         <div className="signin-links mt-3 text-center">
-          <Link to="#/forgot-password" className="signin-link">Forgot Password?</Link>
-          <Link to="#/create-account" className="signin-link mt-2">Create New Account</Link>
+          <Link to="/forgot-password" className="signin-link">Forgot Password?</Link>
+          <Link to="/create-account" className="signin-link mt-2">Create New Account</Link>
         </div>
       </div>
     </div>
