@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import emailjs from 'emailjs-com';
 import { DarkModeContext } from './DarkModeContext';
 import './global.css';
-import './contact.css'; // New CSS file for additional styling
+import './contact.css';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,18 +15,33 @@ export default function Contact() {
 
   const { darkMode } = useContext(DarkModeContext);
 
+  const apiKey = "AIzaSyB29WpUY7XhwndWi-X7__oBG5VsrHkWk8o";
+
+  const mapContainerStyle = {
+    width: '100%',
+    height: '300px',
+    borderRadius: '10px',
+    marginTop: '20px',
+  };
+
+  const center = {
+    lat: 39.96277,
+    lng: -82.87669,
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs.send(
-      'service_8s8jltp', // Replace with your EmailJS service ID
-      'template_dp8mqgr', // Replace with your EmailJS template ID
+      'service_030ozp3',
+      'template_d3y1453',
       formData,
-      'tyyCV9g6FoxoNQZ0s'
+      '2Bu-cNgZwyUtRPB4N'
     ).then((result) => {
       alert('Message sent successfully!');
     }, (error) => {
@@ -42,6 +58,22 @@ export default function Contact() {
         <Row className="justify-content-center mt-4">
           <Col md={8}>
             <Card className="contact-card shadow-lg mb-5">
+            <LoadScript googleMapsApiKey={apiKey}>
+              <GoogleMap
+                mapContainerStyle={mapContainerStyle}
+                center={center}
+                zoom={17}
+              >
+               {/* Marker indicating the agency location */}
+                <MarkerF
+                  position={center}
+                  title="Guardian Angel Health Agency LLC"
+                  icon={{
+                    url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                  }}
+                />
+                </GoogleMap>
+              </LoadScript>
               <Card.Body>
                 <Card.Text className="contact-info">
                   <strong>Address:</strong><br />

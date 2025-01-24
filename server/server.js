@@ -16,7 +16,7 @@ const saltRounds = 10;
 
 app.use(cors({
     origin: '*',//'https://localhost:3000, https://guardianangelha.com, https://gaha-website-002d2aeac73a.herokuapp.com',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: '*',
     allowedHeaders: '*',
     credentials: true, // If you are using cookies or HTTP authentication
 }));

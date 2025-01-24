@@ -1,12 +1,12 @@
 import React from 'react';
-import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api'; 
 import { Container } from 'react-bootstrap';
-import heroImage from './docs/cover.jpeg';
+import heroImage from './docs/Images/cover.jpeg';
 import backgroundImage1 from './docs/Images/n25.jpg';
 import backgroundImage2 from './docs/Images/n0.jpg';
 import backgroundImage3 from './docs/Images/n2.jpeg';
 import './global.css';
-import './about.css'; // Custom CSS for this page
+import './about.css';
 
 export default function AboutPage() {
   const mapContainerStyle = {
@@ -16,9 +16,10 @@ export default function AboutPage() {
     marginTop: '20px',
   };
 
+  //location of 639 s. hamilton rd
   const center = {
-    lat: 39.96277, // Latitude for 639 S. Hamilton Road
-    lng: -82.87669, // Longitude for 639 S. Hamilton Road
+    lat: 39.96277, 
+    lng: -82.87669,
   };
 
   const apiKey = "AIzaSyB29WpUY7XhwndWi-X7__oBG5VsrHkWk8o"; // Replace with your API key
@@ -36,7 +37,7 @@ export default function AboutPage() {
         }}
       >
         <Container className="text-center hero-content">
-          <h1 className="display-3 fw-bold">Welcome to Guardian Angel Health Agency LLC.</h1>
+          <h1 className="display-3 fw-bold">Welcome to Guardian Angel Health Agency LLC</h1>
           <p className="lead" style={{ fontSize: '1.5rem' }}>Close to Heart, Close to Home</p>
         </Container>
       </section>

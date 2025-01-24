@@ -6,33 +6,33 @@ import { useContext } from 'react';
 
 export default function Trainings() {
   const nursingTrainings = [
-    { month: 'January', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdJAMhgbDS-El-TPlmnnEZ0A-gY-GYOj-jUwwCvfZbbCuznDQ/viewform?usp=send_form' },
-    { month: 'February', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeBB2NNupxYOhA0kdeRmrHTdV1LB4yReKZDm9Kp7xT8_1OnRg/viewform' },
-    { month: 'March', link: 'https://docs.google.com/forms/d/e/1FAIpQLSepHT-ISIlaXJdc18AGdBq8j7qbgPW4z4IbTXYg8ebNch5XkA/viewform?usp=send_form' },
-    { month: 'April', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeGmszf2S5pml8uqcPCg6GbsddynFYzN4_ZwnrblCcv4Nsmig/viewform' },
-    { month: 'May', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdz-zqN3YEJFpi0tpIRHzVO2XgMyABYs8Jw_SwOzwXTFaJTAg/viewform' },
-    { month: 'June', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdisjJ5E20RbKPH2qIrXs7j6MnhM2Po-huEQGrMqxtYCr404g/viewform' },
-    { month: 'July', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdxyZh2LKWfBULQo9GaV_o3WeWk893OtpO3qzZ9ETQiWOfwnA/viewform' },
-    { month: 'August', link: 'https://docs.google.com/forms/d/e/1FAIpQLSfTwAFp9cpeVe3TZzg8-5BZLv_WKYeDhu-SpWY6Kia2QY_o0w/viewform' },
-    { month: 'September', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeEs1qHHtFwEEBLupVrS2jYMVOXyxyM351A8Gz81Pct-NNv3g/viewform' },
-    { month: 'October', link: 'https://docs.google.com/forms/d/e/1FAIpQLSfCydoEWNJjtxstg_XHJaUe6zawSj0j7lCsmt-wJNRx_4fjWg/viewform' },
-    { month: 'November', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdIvsl02sIgDhOiZBDKh5G6nvVEzj7MtSOEt4Af2wST2iCL6w/viewform' },
-    { month: 'December', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeHYNgBn2g-lEckglN1ZfwUQxcOPd9oPOyVBuDwD2CpE8lKYQ/viewform' },
+    { month: 'January', link: 'https://forms.office.com/r/BjGLau5FM9' },
+    { month: 'February', link: 'https://forms.office.com/r/MhH9cUjVQe' },
+    { month: 'March', link: 'https://forms.office.com/r/HT5gS5JRE0' },
+    { month: 'April', link: 'https://forms.office.com/r/11DUGNYzrf' },
+    { month: 'May', link: 'https://forms.office.com/r/53nRKshVL5' },
+    { month: 'June', link: 'https://forms.office.com/r/iaM6iSmfRG' },
+    { month: 'July', link: 'https://forms.office.com/r/4aNPpkUiiA' },
+    { month: 'August', link: 'https://forms.office.com/r/X1rRN7CMjB' },
+    { month: 'September', link: 'https://forms.office.com/r/Fyianwjdij' },
+    { month: 'October', link: 'https://forms.office.com/r/Bqsj3VNypz' },
+    { month: 'November', link: 'https://forms.office.com/r/1GFs5AWsR0' },
+    { month: 'December', link: 'https://forms.office.com/r/XmL8EWB9Ku' },
   ];
 
   const hhaTrainings = [
-    { month: 'January', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdJAMhgbDS-El-TPlmnnEZ0A-gY-GYOj-jUwwCvfZbbCuznDQ/viewform' },
-    { month: 'February', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeBB2NNupxYOhA0kdeRmrHTdV1LB4yReKZDm9Kp7xT8_1OnRg/viewform' },
-    { month: 'March', link: 'https://docs.google.com/forms/d/e/1FAIpQLSepHT-ISIlaXJdc18AGdBq8j7qbgPW4z4IbTXYg8ebNch5XkA/viewform' },
-    { month: 'April', link: 'https://docs.google.com/forms/d/e/1FAIpQLSeGmszf2S5pml8uqcPCg6GbsddynFYzN4_ZwnrblCcv4Nsmig/viewform' },
-    { month: 'May', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdz-zqN3YEJFpi0tpIRHzVO2XgMyABYs8Jw_SwOzwXTFaJTAg/viewform' },
-    { month: 'June', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdisjJ5E20RbKPH2qIrXs7j6MnhM2Po-huEQGrMqxtYCr404g/viewform' },
-    { month: 'July', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdxyZh2LKWfBULQo9GaV_o3WeWk893OtpO3qzZ9ETQiWOfwnA/viewform' },
-    { month: 'August', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdTeBKPyavodni3W67NTs9LWEGH2fmKbjTfWb06d8-zSNO8iQ/viewform' },
-    { month: 'September', link: 'https://docs.google.com/forms/d/e/1FAIpQLSfQx3gVeNp0uf-3p91BVH9PAEmGzj08PqovM-_7jmvyDFOgbQ/viewform' },
-    { month: 'October', link: 'https://docs.google.com/forms/d/e/1FAIpQLSdMOXr64na13-CQbwNHeJnHlJ3mN4FUVatKWGiy2SrJNVhz4A/viewform' },
-    { month: 'November', link: 'https://docs.google.com/forms/d/e/1FAIpQLSe9yMd84lLhXvWRPoeIRa63MoRNoJ5X8EsQniJvR14jzy4gwQ/viewform?usp=send_form' },
-    { month: 'December', link: 'https://docs.google.com/forms/d/e/1FAIpQLScU5-T8jpV72zN4lR7TPIcQcw2g6krONg5mn94fesGfaAcxdA/viewform' },
+    { month: 'January', link: 'https://forms.office.com/r/BjGLau5FM9' },
+    { month: 'February', link: 'https://forms.office.com/r/MhH9cUjVQe' },
+    { month: 'March', link: 'https://forms.office.com/r/HT5gS5JRE0' },
+    { month: 'April', link: 'https://forms.office.com/r/11DUGNYzrf' },
+    { month: 'May', link: 'https://forms.office.com/r/53nRKshVL5' },
+    { month: 'June', link: 'https://forms.office.com/r/iaM6iSmfRG' },
+    { month: 'July', link: 'https://forms.office.com/r/4aNPpkUiiA' },
+    { month: 'August', link: 'https://forms.office.com/r/S6evSnr4Ez' },
+    { month: 'September', link: 'https://forms.office.com/r/DZ6gUxbimt' },
+    { month: 'October', link: 'https://forms.office.com/r/jAnLPbTtzv' },
+    { month: 'November', link: 'https://forms.office.com/r/XmL8EWB9Ku' },
+    { month: 'December', link: 'https://forms.office.com/r/XmL8EWB9Ku' },
   ];
 
   const documents = [
@@ -67,6 +67,8 @@ export default function Trainings() {
                             key={index} 
                             variant="outline-primary" 
                             href={training.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
                             className="month-button"
                           >
                             {training.month}
@@ -89,6 +91,8 @@ export default function Trainings() {
                             key={index} 
                             variant="outline-primary" 
                             href={training.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
                             className="month-button"
                           >
                             {training.month}
@@ -113,7 +117,7 @@ export default function Trainings() {
                         {documents.map((doc, index) => (
                           <Button 
                             key={index} 
-                            variant="outline-secondary" 
+                            variant="outline-primary" 
                             href={doc.link} 
                             className="document-button"
                           >
@@ -127,8 +131,8 @@ export default function Trainings() {
               </Row>
 
               <div className="text-center mt-5">
-                <Button variant="success" href="#cpr-training" className="special-button me-3">CPR Training</Button>
-                <Button variant="warning" href="#mental-health-quiz" className="special-button">Mental Health Quiz</Button>
+                <Button variant="success" href="https://nationalcprfoundation.com/cpr-recertification-renewal/" className="special-button me-3">CPR Training</Button>
+                <Button variant="warning" href="https://screening.mhanational.org/screening-tools/" className="special-button me-3">Mental Health Quiz</Button>
               </div>
             </Card.Body>
           </Card>

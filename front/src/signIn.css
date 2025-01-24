@@ -16,11 +16,15 @@
   /* Card Styling */
   .signin-card {
     background-color: #ffffff;
-    border-radius: 12px;
+    border-radius: 9.5px;
     padding: 30px;
     width: 350px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
+    text-align: left;
+  }
+
+  .form-label {
+    font-weight: bold;
   }
   
   .dark-mode .signin-card {
@@ -50,7 +54,7 @@
     color: #ffffff;
     background-color: #007bff;
     border: none;
-    border-radius: 5px;
+    border-radius: 120px;
     padding: 10px 0;
     width: 100%;
     transition: background-color 0.3s;
@@ -66,10 +70,59 @@
     color: #007bff;
     font-weight: 500;
     margin-top: 0.5rem;
+    text-align: left;
   }
   
   .signin-links .signin-link:hover {
     color: #0056b3;
     text-decoration: underline;
   }
+
+.signin-phrase{
+  font-weight: 300;
+  margin-top: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.title-dark {
+  color: #85d7ff;
+}
+
+.title-light {
+  color: #0056b3;
+}
+
+.signin-link-dark {
+  color: #85d7ff;
+}
+
+.signin-link-light {
+  color: #0056b3;
+}
+
+.signin-divider-dark {
+  background-color: #ffffff;
+  color: #ffffff;
+}
+
+.signin-divider-light {
+  background-color: #0056b3;
+}
+
+.phrase-dark {
+  color: #85d7ff;
+}
+
+.phrase-light {
+  color: #0f2027;
+}
+
+  /* Divider */
+.signin-divider {
+  border: none;
+  height: 1.2px;  
+  margin: 30px 0;
+}
   

@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Home from './home';
 import Create from './create';
+import AllUsers from './allUsers'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Read from './read';
 import Edit from './edit';
@@ -50,14 +50,16 @@ export default function App() {
         {auth.token ? (
           employeeUsername === "annemulama" ? (
             <>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<About />} />
               <Route path="/create" element={<Create />} />
               <Route path="/punchhistory/:username" element={<PunchHistory />} />
               <Route path="/read/:username" element={<Read />} />
               <Route path="/edit/:username" element={<Edit />} />
               <Route path="/clockinout" element={<ClockInOut />} />
+              <Route path="/clockinout/:username" element={<ClockInOut />} />
               <Route path="/totp/display" element={<QRCodeDisplay />} />
               <Route path="/trainings" element={<Trainings />} />
+              <Route path="/allUsers" element={<AllUsers />} />
             </>
           ) : employeeUsername === "gahaemployee" ? (
             <>

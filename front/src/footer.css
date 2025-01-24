@@ -1,45 +1,163 @@
-/* footer.css */
+/* General Styling */
+.footer-content {
+  padding: 40px 0;
+  font-family: 'Roboto', sans-serif;
+}
 
-/* Footer background and text color for light and dark modes */
 .footer-dark {
-    background-color: #212529; /* Dark background to match header dark mode */
-    color: #ffffff;
+  background-color: #181818;
+  color: #f8f9fa;
+}
+
+.footer-light {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+/* Branding Section */
+.footer-brand {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #007bff; /* Dark blue for light mode */
+  text-align: center;
+  text-shadow: none;
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Links Section */
+.footer-title {
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #007bff; /* Dark blue for light mode */
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+.footer-dark .footer-brand {
+  color: #85d7ff; /* Bright blue for dark mode */
+  text-shadow: 0 0 5px #85d7ff, 0 0 15px #85d7ff; /* Glow in dark mode */
+}
+
+/* Tagline */
+.footer-tagline {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #0056b3; /* Darker blue for light mode */
+  text-align: center;
+}
+
+.footer-dark .footer-tagline {
+  color: #aad7ff; /* Lighter blue for dark mode */
+}
+
+.footer-dark .footer-title {
+  color: #85d7ff; /* Bright blue for dark mode */
+}
+
+/* Links in Footer */
+.footer-dark a {
+  color: #85d7ff;
+}
+
+.footer-light a {
+  color: #007bff;
+}
+
+.footer-link:hover {
+  color: #28a745;
+  text-decoration: underline;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.footer-links a {
+  color: #0056b3; /* Dark blue for light mode */
+  text-decoration: none;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: none;
+}
+
+.footer-dark .footer-links a {
+  color: #aad7ff; /* Lighter blue for dark mode */
+}
+
+.footer-dark .footer-links a:hover {
+  text-shadow: 0 0 10px #85d7ff; /* Glow in dark mode */
+}
+
+.footer-links a:hover {
+  color: #003580; /* Darker blue on hover in light mode */
+}
+
+/* Social Icons Section */
+.footer-social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-icon {
+  font-size: 1.75rem;
+  color: #0056b3; /* Dark blue for light mode */
+  transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+  text-shadow: none;
+}
+
+.footer-dark .social-icon {
+  color: #aad7ff; /* Light blue for dark mode */
+  text-shadow: 0 0 5px #85d7ff, 0 0 15px #85d7ff; /* Glow in dark mode */
+}
+
+.social-icon:hover {
+  color: #003580; /* Darker blue for light mode */
+  transform: scale(1.2);
+}
+
+/* Divider */
+.footer-divider {
+  border: none;
+  height: 2px;
+  background-color: #0056b3;
+  margin: 30px 0;
+}
+
+/* Copyright Section */
+.footer-copyright {
+  font-size: 1rem;
+  color: #0056b3; /* Dark blue for light mode */
+  text-align: center;
+}
+
+.footer-dark .footer-copyright {
+  color: #aad7ff; /* Light blue for dark mode */
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .footer-brand {
+    font-size: 1.5rem;
   }
-  
-  .footer-light {
-    background-color: #ffffff; /* Light background to match header light mode */
-    color: #212529;
+
+  .footer-title {
+    font-size: 1.25rem;
   }
-  
-  /* Footer link styles */
-  .footer-link {
-    color: #28a745; /* Green color for footer links to match header button outline */
-    text-decoration: none;
+
+  .footer-links a {
+    font-size: 1rem;
   }
-  
-  .footer-link:hover,
-  .footer-link:focus {
-    color: #ffffff; /* White color on hover in dark mode */
-    text-decoration: underline;
+
+  .social-icon {
+    font-size: 1.5rem;
   }
-  
-  /* Footer padding and font size */
-  .footer-content {
-    padding: 20px; /* Adjust padding as needed */
-    font-size: 1.2rem; /* Slightly larger font size for readability */
-    text-align: center; /* Center text */
-  }
-  
-  /* Footer button style similar to header custom button */
-  .footer-button {
-    font-size: 1.2rem;
-    color: #28a745; /* Green text */
-    border-color: #28a745; /* Green border */
-  }
-  
-  .footer-button:hover,
-  .footer-button:focus {
-    background-color: #28a745; /* Green background on hover/focus */
-    color: #ffffff; /* White text for contrast */
-  }
-  
+}

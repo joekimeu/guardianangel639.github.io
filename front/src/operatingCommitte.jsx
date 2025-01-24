@@ -27,7 +27,7 @@ export default function OperatingCommittee() {
 
             <Card className="committee-card mb-5">
               <Card.Body>
-                <Card.Title className="committee-title">Anne Mulama, RN, MSN</Card.Title>
+                <Card.Title className="committee-title">Anne Mulama, MSN, RN</Card.Title>
                 <Card.Subtitle className="committee-role">Chief Executive Officer and Director of Clinical Services</Card.Subtitle>
                 <Card.Text className="committee-description">
                   Anne Mulama is the Director of Clinical Services at Guardian Angel Health Agency, bringing 20 years of diverse nursing experience across top healthcare institutions. With a Master’s in Nursing, Anne has honed her clinical expertise at respected hospitals, including The Ohio State University, Cleveland Clinic, OhioHealth, Mount Carmel Health System, and Alta Bates Summit Medical in San Francisco, California.

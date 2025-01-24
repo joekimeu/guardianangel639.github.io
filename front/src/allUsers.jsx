@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from './DarkModeContext';
 import './global.css';
+import './allUsers.css'
 
 export default function AllUsers() {
     const [data, setData] = useState([]);
@@ -58,7 +59,7 @@ export default function AllUsers() {
     };
 
     return (
-        <div className={`d-flex flex-column min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} p-5`}>
+        <div className={`allusers-section d-flex flex-column min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} p-5`}>
             <div className="d-flex justify-content-between align-items-center mb-4" style={{ fontSize: '2rem' }}>
                 <h2>Employee List</h2>
                 <Link to="/create" className="btn btn-success btn-lg">Create +</Link>

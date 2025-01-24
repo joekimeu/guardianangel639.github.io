@@ -1,76 +1,68 @@
-/* about.css */
-
 /* General page styling */
 .about-page {
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Hero section styling */
-  .hero-section {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #ffffff;
-    background-color: #333;
-  }
-  
-  .hero-content {
-    max-width: 700px;
-  }
-  
-  /* Full-screen sections */
-  .full-screen-section {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffffff;
-    transition: background 0.5s ease-in-out;
-    text-align: center;
-    background-color: #2d2d2d;
-  }
-  
-  .section-content {
-    max-width: 700px;
-    padding: 20px;
-  }
-  
-  .section-text {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #ffffff;
-  }
-  
-  /* Responsive typography */
-  h1, h2 {
-    font-size: calc(1.5rem + 2vw);
-  }
-  
-  .section-text, .lead {
-    font-size: calc(1rem + 0.5vw);
-  }
-  
-  /* Interactive hover effect */
-  .full-screen-section:hover {
-    background-size: 110%;
-    transition: background-size 0.6s ease;
-  }
-  
-  /* Link styling */
-  a.text-white:hover {
-    color: #aad7ff;
-    text-decoration: underline;
-  }
-  
-  /* about.css */
-
-/* Style for the tagline to increase font size */
-.hero-content .lead {
-  font-size: 1.5rem; /* Adjust this value as needed */
+  font-family: Arial, sans-serif;
 }
 
+/* Hero section styling */
+.hero-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  background-color: #333;
+  padding: 0 20px; /* Add padding for smaller screens */
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+/* Full-screen sections */
+.full-screen-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: background 0.5s ease-in-out;
+  text-align: center;
+  background-color: #2d2d2d;
+  padding: 0 20px; /* Add padding for smaller screens */
+}
+
+.section-content {
+  max-width: 700px;
+  padding: 20px;
+}
+
+.section-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #ffffff;
+}
+
+/* Responsive typography */
+h1, h2 {
+  font-size: calc(1.5rem + 2vw);
+}
+
+.section-text, .lead {
+  font-size: calc(1rem + 0.5vw);
+}
+
+/* Interactive hover effect */
+.full-screen-section:hover {
+  background-size: 110%;
+  transition: background-size 0.6s ease;
+}
+
+/* Link styling */
+a.text-white:hover {
+  color: #aad7ff;
+  text-decoration: underline;
+}
 
 /* Overlay for improved legibility */
 .overlay {
@@ -97,13 +89,6 @@
   color: #ffffff; /* Ensure text is white for contrast */
 }
 
-/* Overlay for improved legibility on text */
-.text-overlay {
-  position: relative;
-  padding: 40px;
-}
-
-/* Increase font weight and size for better readability */
 .section-content h2 {
   font-weight: 700;
   font-size: 2.5rem;
@@ -112,4 +97,66 @@
 .section-content p {
   font-size: 1.25rem;
   line-height: 1.8;
+}
+
+/* Responsive fixes using media queries */
+@media (max-width: 1024px) {
+  .hero-section {
+    height: 80vh;
+  }
+
+  .full-screen-section {
+    height: auto; /* Allow sections to adjust height */
+    padding: 40px 20px;
+  }
+
+  .section-content {
+    max-width: 90%;
+  }
+
+  h1, h2 {
+    font-size: calc(1.25rem + 1.5vw);
+  }
+
+  .section-text, .lead {
+    font-size: calc(0.875rem + 0.4vw);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 70vh;
+  }
+
+  .full-screen-section {
+    height: auto;
+    padding: 30px 15px;
+  }
+
+  h1, h2 {
+    font-size: calc(1rem + 1.25vw);
+  }
+
+  .section-text, .lead {
+    font-size: calc(0.8rem + 0.3vw);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: 60vh;
+  }
+
+  .full-screen-section {
+    height: auto;
+    padding: 20px 10px;
+  }
+
+  h1, h2 {
+    font-size: calc(0.875rem + 1vw);
+  }
+
+  .section-text, .lead {
+    font-size: calc(0.75rem + 0.25vw);
+  }
 }

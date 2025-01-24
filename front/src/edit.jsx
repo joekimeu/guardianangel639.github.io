@@ -43,9 +43,9 @@ export default function Edit() {
 
     const handleUpdate = (event) => {
         event.preventDefault();
-        axios.put(`https://gaha-website-002d2aeac73a.herokuapp.com/edit/${username}`, values)
+        axios.put(`https://gaha-website-c6534f8cf004.herokuapp.com/edit/${username}`, values)
             .then(res => {
-                navigate('/home');
+                navigate('/about');
             })
             .catch(err => console.log(err));
     };

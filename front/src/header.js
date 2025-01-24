@@ -2,11 +2,9 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from './context/AuthProvider';
 import { jwtDecode } from 'jwt-decode';
 import { FaSun, FaMoon } from 'react-icons/fa';
@@ -15,30 +13,22 @@ import './global.css';
 import { DarkModeContext } from './DarkModeContext';
 
 export default function Header() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
   const [showMenu, setShowMenu] = useState(false);
+  const [role, setRole] = useState('guest'); // Default role as 'guest'
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
+  let [username, setUsername] = useState('null');
   const navigate = useNavigate();
   const { auth, logout } = useContext(AuthContext);
 
   useEffect(() => {
-    // Apply a class to the body based on the theme
     document.body.classList.toggle('dark-theme', darkMode);
     document.body.classList.toggle('light-theme', !darkMode);
   }, [darkMode]);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
-      setShowMenu(false); // Close menu after search
-    }
-  };
-
   const handleLogout = () => {
     logout();
     navigate('/signin');
-    setShowMenu(false); // Close menu on logout
+    setShowMenu(false);
   };
 
   const handleMenuToggle = () => {
@@ -46,46 +36,95 @@ export default function Header() {
   };
 
   const handleLinkClick = (path) => {
-    setShowMenu(false); // Close menu on link click
+    setShowMenu(false);
     navigate(path);
   };
 
-  let employeeUsername = null;
-  try {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      employeeUsername = decodedToken.username;
+
+
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem('authToken');
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        username = decodedToken.username;
+        setUsername(username)
+        // Assign roles based on username
+        if (['annemulama', 'joekimeu'].includes(username)) {
+          setRole('admin');
+        } else if (['tracynungo', 'doraboamoah', 'loradickerson'].includes(username)) {
+          setRole('employee');
+        } else if (['gahaemployee', 'gahanurse', 'gahahha'].includes(username)) {
+          setRole('staff');
+        } else {
+          setRole('guest');
+        }
+      }
+    } catch (error) {
+      console.error('Failed to decode token:', error);
     }
-  } catch (error) {
-    console.error('Failed to decode token:', error);
-  }
+  }, [auth]);
+
+  // Role-based menu configuration
+  const menuConfig = {
+    admin: [
+      { label: 'Leadership', path: '/operatingcommittee' },
+      { label: 'Prospective', path: '/prospective' },
+      { label: 'Contact', path: '/contact' },
+      { label: 'Profile', path: `/read/${username}` },
+      { label: 'Punchcard', path: '/clockinout' },
+      { label: 'All Users', path: '/allUsers' },
+      { label: 'Make New User', path: '/create' },
+      { label: 'Trainings', path: '/trainings' },
+    ],
+    employee: [
+      { label: 'Leadership', path: '/operatingcommittee' },
+      { label: 'Prospective', path: '/prospective' },
+      { label: 'Contact', path: '/contact' },
+      { label: 'Profile', path: `/read/${username}` },
+      { label: 'Punchcard', path: '/clockinout' },
+      { label: 'Trainings', path: '/trainings' },
+    ],
+    staff: [
+      { label: 'Leadership', path: '/operatingcommittee' },
+      { label: 'Prospective', path: '/prospective' },
+      { label: 'Contact', path: '/contact' },
+      { label: 'Trainings', path: '/trainings' },
+    ],
+    guest: [
+      { label: 'Leadership', path: '/operatingcommittee' },
+      { label: 'Prospective', path: '/prospective' },
+      { label: 'Contact', path: '/contact' },
+      { label: 'Sign In', path: '/signin'}
+    ],
+  };
+
+  // Determine the menu items to display based on the user's role
+  const menuItems = menuConfig[role] || menuConfig.guest;
 
   return (
     <>
       <Navbar
-        bg={darkMode ? 'dark' : 'light'}
-        className={`mb-3 ${darkMode ? 'navbar-dark' : 'navbar-light'} fixed-top`}
+       bg={darkMode ? 'dark' : 'light'}
         expand="lg"
-        style={{ zIndex: 1050, width: '100%' }}
+        className={`fixed-top custom-navbar ${darkMode ? 'navbar-dark' : 'navbar-light'}`}
       >
-        <Container fluid>
-          <Navbar.Brand href="/" style={{ fontSize: '2rem', color: darkMode ? '#ffffff' : '#000000' }}>
-            <span className="d-none d-lg-inline">Guardian Angel Health Agency LLC</span>
-            <span className="d-inline d-lg-none">GAHA LLC</span>
+        <Container fluid className="d-flex justify-content-between align-items-center">
+          <Navbar.Brand href="/" className={`brand-title ${darkMode ? 'brand-title-light' : 'brand-title-dark'}`}>
+            Guardian Angel Health Agency LLC
           </Navbar.Brand>
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center header-icons">
             <Button
-              variant="outline-success"
+              variant={`${darkMode ? 'custom-button-dark' : 'custom-button-light'}`}
               onClick={toggleDarkMode}
-              className="me-2 custom-button"
+              className={`me-3 custom-button ${darkMode ? 'custom-button-dark' : 'custom-button-light'}`}
             >
               {darkMode ? <FaSun /> : <FaMoon />}
             </Button>
             <Button
-              variant="outline-success"
+              variant={`${darkMode ? 'custom-button-dark' : 'custom-button-light'}`}
               onClick={handleMenuToggle}
-              className="custom-button"
+              className={`custom-button ${darkMode ? 'custom-button-dark' : 'custom-button-light'}`}
             >
               Menu
             </Button>
@@ -97,54 +136,31 @@ export default function Header() {
         show={showMenu}
         onHide={handleMenuToggle}
         placement="end"
-        style={{ width: '100%', maxWidth: '100%' }}
-        className={darkMode ? 'offcanvas-close-dark' : 'offcanvas-close-light'}
+        className={`${darkMode ? 'offcanvas-dark' : 'offcanvas-light'}`}
       >
         <Offcanvas.Header closeButton className={darkMode ? 'bg-dark text-white' : 'bg-light text-dark'}>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
+          <Offcanvas.Title className="offcanvas-title">Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className={`${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} align-left`}>
-          <Nav className="flex-column menu-options align-left">
-            <Nav.Link onClick={() => handleLinkClick('/operatingcommittee')} className="menu-option-item">Leadership</Nav.Link>
-            <Nav.Link onClick={() => handleLinkClick('/prospective')} className="menu-option-item">Prospective</Nav.Link>
-            <Nav.Link onClick={() => handleLinkClick('/contact')} className="menu-option-item">Contact</Nav.Link>
-            {auth.token ? (
-              <>
-                {employeeUsername !== "gahaemployee" && (
-                  <>
-                    <Nav.Link onClick={() => handleLinkClick(`/edit/${employeeUsername}`)} className="menu-option-item">Profile</Nav.Link>
-                    <Nav.Link onClick={() => handleLinkClick('/clockinout')} className="menu-option-item">Punchcard</Nav.Link>
-                  </>
-                )}
-                {employeeUsername === "annemulama" && (
-                  <NavDropdown title="Admin Options" className={`${darkMode ? 'text-white' : 'text-dark'} menu-option-item`}>
-                    <NavDropdown.Item onClick={() => handleLinkClick('/home')}>All Users</NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => handleLinkClick('/create')}>Make New User</NavDropdown.Item>
-                    <NavDropdown.Item onClick={() => handleLinkClick('/trainings')}>Trainings</NavDropdown.Item>
-                  </NavDropdown>
-                )}
-                {employeeUsername === "gahaemployee" && (
-                  <Nav.Link onClick={() => handleLinkClick('/trainings')} className="menu-option-item">Trainings</Nav.Link>
-                )}
-                <Nav.Link onClick={handleLogout} className="menu-option-item">Logout</Nav.Link>
-              </>
-            ) : (
-              <Nav.Link onClick={() => handleLinkClick('/signin')} className="menu-option-item">Sign In</Nav.Link>
+          <Nav className="flex-column">
+            {menuItems.map((item, index) => (
+              <Nav.Link
+                key={index}
+                onClick={() => handleLinkClick(item.path)}
+                className="menu-option-item"
+              >
+                {item.label}
+              </Nav.Link>
+            ))}
+            {auth.token && (
+              <Nav.Link onClick={handleLogout} className="menu-option-item">
+                Logout
+              </Nav.Link>
             )}
           </Nav>
-          <Form className="search-form" onSubmit={handleSearch}>
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Button variant="outline-success" type="submit">Search</Button>
-          </Form>
         </Offcanvas.Body>
       </Offcanvas>
     </>
   );
 }
+
