@@ -1,104 +1,152 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import { AuthContext } from './context/AuthProvider';
-import { DarkModeContext } from './DarkModeContext';
-import './global.css';
-import './signIn.css'; // New CSS file for custom styling
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { auth, handleApiError } from './services/api';
+import './signIn.css';
 
-export default function SignIn() {
-  const { login } = useContext(AuthContext);
-  const [data, setData] = useState({ username: '', password: '' });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [isChecked, setIsChecked] = useState(false); // State for opt-in checkbox
-  const navigate = useNavigate();
-  const { darkMode } = useContext(DarkModeContext);
+const SignIn = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { setAuth } = useAuth();
+    
+    const [formData, setFormData] = useState({
+        username: '',
+        password: ''
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
-  };
+    // Get the page user was trying to access
+    const from = location.state?.from?.pathname || "/";
 
-  const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
-  };
+    const handleChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+        // Clear error when user starts typing
+        if (error) setError(null);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!isChecked) {
-      setError('You must agree to receive SMS updates to sign in.');
-      return;
-    }
-    setLoading(true);
-    setError(null);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
 
-    try {
-      const res = await axios.post('https://gaha-website-c6534f8cf004.herokuapp.com/signin', data);
-      if (res.data.token) {
-        login(res.data.token);
-        navigate('/about');
-      } else {
-        setError('Failed to sign in: No token received');
-      }
-    } catch (err) {
-      setError('Failed to sign in: ' + (err.response?.data?.error || err.message));
-    } finally {
-      setLoading(false);
-    }
-  };
+        try {
+            // Validate input
+            if (!formData.username.trim() || !formData.password.trim()) {
+                throw new Error('Username and password are required');
+            }
 
-  return (
-    <div className={`signin-page ${darkMode ? 'dark-mode' : 'light-mode'}`}>
-      <div className="signin-card shadow">
-        <h2 className={`signin-title ${darkMode ? 'title-dark' : 'title-light'}`}>Sign In</h2>
-        {error && <div className="signin-error">{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input
-              type="text"
-              name="username"
-              className="form-control"
-              id="username"
-              value={data.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              name="password"
-              className="form-control"
-              id="password"
-              value={data.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <input
-              type="checkbox"
-              id="sms-opt-in"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              required
-            />
-            <label htmlFor="sms-opt-in" className="form-check-label">
-            I agree to receive SMS updates about account activity, service changes, and other relevant notifications from Guardian Angel Health Agency LLC at (877) 831-7450.
-            Reply STOP to opt-out. Reply HELP for help.
-            </label>
-          </div>
-          <button type="submit" className="signin-button" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-        <hr className = {`signin-divider ${darkMode ? 'signin-divider-dark' : 'signin-divider-light'}`}/>
-        <div className="signin-links mt-3 text-center">
-          <Link to="/forgot-password" className={`signin-link ${darkMode ? 'signin-link-dark' : 'signin-link-light'}`}>Forgot Password?</Link>          
+            // Attempt sign in
+            const response = await auth.signIn(formData);
+            
+            // Update auth context
+            setAuth({
+                user: response.user,
+                token: response.token
+            });
+
+            // Clear form
+            setFormData({
+                username: '',
+                password: ''
+            });
+
+            // Navigate to original destination or home
+            navigate(from, { replace: true });
+        } catch (err) {
+            const errorDetails = handleApiError(err);
+            
+            switch (errorDetails.type) {
+                case 'AUTH_ERROR':
+                    setError('Invalid username or password');
+                    break;
+                case 'RATE_LIMIT':
+                    setError('Too many attempts. Please try again later.');
+                    break;
+                case 'NETWORK_ERROR':
+                    setError('Unable to connect to server. Please check your internet connection.');
+                    break;
+                default:
+                    setError('An error occurred. Please try again.');
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="sign-in">
+            <div className="sign-in-content">
+                <h1>Sign In</h1>
+                <p className="welcome-text">Welcome back! Please sign in to continue.</p>
+
+                {error && (
+                    <div className="alert alert-error" role="alert">
+                        {error}
+                    </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="sign-in-form">
+                    <div className="form-group">
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            className="form-control"
+                            value={formData.username}
+                            onChange={handleChange}
+                            disabled={loading}
+                            required
+                            autoComplete="username"
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="form-control"
+                            value={formData.password}
+                            onChange={handleChange}
+                            disabled={loading}
+                            required
+                            autoComplete="current-password"
+                        />
+                    </div>
+
+                    <div className="form-options">
+                        <label className="remember-me">
+                            <input
+                                type="checkbox"
+                                name="remember"
+                            /> Remember me
+                        </label>
+                        <a href="/forgot-password" className="forgot-password">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button 
+                        type="submit" 
+                        className={`btn btn-primary ${loading ? 'loading' : ''}`}
+                        disabled={loading}
+                    >
+                        {loading ? 'Signing in...' : 'Sign In'}
+                    </button>
+                </form>
+
+                <div className="help-text">
+                    Having trouble signing in? Please contact your administrator or call our support team at (614) 868-3225.
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
+
+export default SignIn;

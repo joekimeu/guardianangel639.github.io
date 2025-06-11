@@ -1,95 +1,65 @@
-import './App.css';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Create from './create';
-import AllUsers from './allUsers'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Read from './read';
-import Edit from './edit';
-import SignIn from './signIn';
-import ClockInOut from './clockinout';
-import Missing from './missing';
-import Unauthorized from './unauthorized';
 import Layout from './layout';
-import SearchResults from './searchResults';
-import { AuthContext } from './context/AuthProvider';
-import PunchHistory from './punchHistory';
-import {jwtDecode} from 'jwt-decode';
+import Home from './home';
 import About from './about';
-import OperatingCommittee from './operatingCommitte';
+import Contact from './contact';
 import Trainings from './trainings';
 import Prospective from './prospective';
-import Contact from './contact';
+import SignIn from './signIn';
+import Missing from './missing';
+import Unauthorized from './unauthorized';
+import RequireAuth from './RequireAuth';
+import OperatingCommitte from './operatingCommitte';
+import ClockInOut from './clockinout';
+import PunchHistory from './punchHistory';
 import QRCodeDisplay from './qrCodeDisplay';
-import React, { useContext, useEffect } from 'react';
-import { DarkModeContext } from './DarkModeContext';
-import './global.css';
+import AllUsers from './allUsers';
+import { DarkModeProvider } from './context/DarkModeContext';
+import { AuthProvider } from './context/AuthProvider';
+import './App.css';
 
-export default function App() {
-  const { auth } = useContext(AuthContext);
-  const { darkMode } = useContext(DarkModeContext); // Access dark mode state
-  let employeeUsername = null;
+// Define role-based route access
+const ROLES = {
+  User: 'User',
+  Admin: 'Admin'
+};
 
-  try {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      employeeUsername = decodedToken.username;
-    }
-  } catch (error) {
-    console.error('Failed to decode token:', error);
-  }
-
-  // Apply the dark-mode class to the body element based on darkMode state
-  useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
-  }, [darkMode]);
-
+function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        {auth.token ? (
-          employeeUsername === "annemulama" ? (
-            <>
-              <Route path="/" element={<About />} />
-              <Route path="/create" element={<Create />} />
-              <Route path="/punchhistory/:username" element={<PunchHistory />} />
-              <Route path="/read/:username" element={<Read />} />
-              <Route path="/edit/:username" element={<Edit />} />
-              <Route path="/clockinout" element={<ClockInOut />} />
-              <Route path="/clockinout/:username" element={<ClockInOut />} />
-              <Route path="/totp/display" element={<QRCodeDisplay />} />
-              <Route path="/trainings" element={<Trainings />} />
-              <Route path="/allUsers" element={<AllUsers />} />
-            </>
-          ) : employeeUsername === "gahaemployee" ? (
-            <>
-              <Route path="/totp/display" element={<QRCodeDisplay />} />
-              <Route path="/trainings" element={<Trainings />} />
-            </>
-          ) : (
-            <>
-              <Route path="/read/:username" element={<Read />} />
-              <Route path="/edit/:username" element={<Edit />} />
-              <Route path="/clockinout" element={<ClockInOut />} />
-              <Route path="/totp/display" element={<QRCodeDisplay />} />
-              <Route path="/trainings" element={<Trainings />} />
-            </>
-          )
-        ) : (
-          <Route path="*" element={<Unauthorized />} />
-        )}
+    <AuthProvider>
+      <DarkModeProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="prospective" element={<Prospective />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* Public routes */}
-        <Route exact path="/" element={<About />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/unauthorized" element={<Unauthorized />} />
-        <Route path="*" element={<Missing />} />
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/operatingcommittee" element={<OperatingCommittee />} />
-        <Route path="/prospective" element={<Prospective />} />
-        <Route path="/contact" element={<Contact />} />
-      </Route>
-    </Routes>
+            {/* Protected Routes - Users & Admins */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+              <Route path="trainings" element={<Trainings />} />
+              <Route path="clockinout" element={<ClockInOut />} />
+              <Route path="punchhistory" element={<PunchHistory />} />
+              <Route path="qrcode" element={<QRCodeDisplay />} />
+            </Route>
+
+            {/* Protected Routes - Admin Only */}
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path="allusers" element={<AllUsers />} />
+              <Route path="operatingcommitte" element={<OperatingCommitte />} />
+            </Route>
+
+            {/* Catch All */}
+            <Route path="*" element={<Missing />} />
+          </Route>
+        </Routes>
+      </DarkModeProvider>
+    </AuthProvider>
   );
 }
+
+export default App;

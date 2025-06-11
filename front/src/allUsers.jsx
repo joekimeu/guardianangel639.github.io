@@ -1,86 +1,225 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { DarkModeContext } from './DarkModeContext';
-import './global.css';
-import './allUsers.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { employees, handleApiError } from './services/api';
+import { useAuth } from './hooks/useAuth';
+import './allUsers.css';
 
-export default function AllUsers() {
-    const [data, setData] = useState([]);
+const AllUsers = () => {
+    const navigate = useNavigate();
+    const { auth } = useAuth();
+    
+    const [userList, setUserList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { darkMode } = useContext(DarkModeContext);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [filters, setFilters] = useState({
+        position: '',
+        sortBy: 'lastname',
+        sortOrder: 'asc'
+    });
+    const itemsPerPage = 10;
 
     useEffect(() => {
-        axios.get('https://gaha-website-c6534f8cf004.herokuapp.com/home')
-            .then(res => {
-                setData(res.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err);
-                setLoading(false);
+        fetchUsers();
+    }, [page, filters]);
+
+    const fetchUsers = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            const response = await employees.getAll(page, itemsPerPage);
+            let filteredUsers = response.data || [];
+
+            // Apply position filter
+            if (filters.position) {
+                filteredUsers = filteredUsers.filter(user => 
+                    user.position === filters.position
+                );
+            }
+
+            // Apply sorting
+            filteredUsers.sort((a, b) => {
+                const aValue = a[filters.sortBy].toLowerCase();
+                const bValue = b[filters.sortBy].toLowerCase();
+                return filters.sortOrder === 'asc' 
+                    ? aValue.localeCompare(bValue)
+                    : bValue.localeCompare(aValue);
             });
-    }, []);
 
-    const handleDelete = (username) => {
-        axios.delete('https://gaha-website-c6534f8cf004.herokuapp.com/delete/' + username)
-            .then(res => {
-                setData(data.filter(employee => employee.username !== username));
-            })
-            .catch(err => console.log(err));
+            setUserList(filteredUsers);
+            setTotalPages(Math.ceil(response.total / itemsPerPage));
+        } catch (err) {
+            const errorDetails = handleApiError(err);
+            setError(errorDetails.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const output = () => {
-        if (loading) return <div>Loading...</div>;
-        if (error) return <div>Error fetching data: {error.message}</div>;
-
-        return Array.isArray(data) && data.length > 0 ? (
-            data.map((employee, index) => (
-                <tr key={index}>
-                    <td>{employee.username}</td>
-                    <td>{employee.email}</td>
-                    <td>{employee.firstname}</td>
-                    <td>{employee.lastname}</td>
-                    <td>{employee.position}</td>
-                    <td>
-                        <Link to={'/read/' + employee.username} className="btn btn-info btn-sm me-2">Read</Link>
-                        <Link to={'/edit/' + employee.username} className="btn btn-primary btn-sm me-2">Edit</Link>
-                        <Link to={'/clockinout/' + employee.username} className="btn btn-secondary btn-sm me-2">Punchcard</Link>
-                        <button onClick={() => handleDelete(employee.username)} className="btn btn-danger btn-sm">Delete</button>
-                    </td>
-                </tr>
-            ))
-        ) : (
-            <tr>
-                <td colSpan="6" className="text-center">No data available</td>
-            </tr>
-        );
+    const handleFilterChange = (e) => {
+        const { name, value } = e.target;
+        setFilters(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        setPage(1); // Reset to first page when filters change
     };
+
+    const getUniquePositions = () => {
+        const positions = new Set(userList.map(user => user.position));
+        return Array.from(positions);
+    };
+
+    const handleViewDetails = (username) => {
+        navigate(`/employees/${username}`);
+    };
+
+    const handleEdit = (username) => {
+        navigate(`/employees/${username}/edit`);
+    };
+
+    const isAdmin = auth.user.position === 'Administrator';
 
     return (
-        <div className={`allusers-section d-flex flex-column min-vh-100 ${darkMode ? 'bg-dark text-white' : 'bg-light text-dark'} p-5`}>
-            <div className="d-flex justify-content-between align-items-center mb-4" style={{ fontSize: '2rem' }}>
-                <h2>Employee List</h2>
-                <Link to="/create" className="btn btn-success btn-lg">Create +</Link>
+        <div className="all-users">
+            <div className="users-header">
+                <h1>All Employees</h1>
+                
+                {isAdmin && (
+                    <button
+                        onClick={() => navigate('/employees/new')}
+                        className="btn btn-primary"
+                    >
+                        Add New Employee
+                    </button>
+                )}
             </div>
-            <div className={`table-responsive rounded shadow-lg p-4 ${darkMode ? 'bg-dark text-light' : 'bg-white'}`}>
-                <table className={`table ${darkMode ? 'table-dark' : 'table-light'} table-hover table-bordered`}>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Position</th>
-                            <th>Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {output()}
-                    </tbody>
-                </table>
+
+            <div className="filters-section">
+                <div className="filter-group">
+                    <label htmlFor="position">Position:</label>
+                    <select
+                        id="position"
+                        name="position"
+                        value={filters.position}
+                        onChange={handleFilterChange}
+                        className="form-control"
+                    >
+                        <option value="">All Positions</option>
+                        {getUniquePositions().map(position => (
+                            <option key={position} value={position}>
+                                {position}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <label htmlFor="sortBy">Sort By:</label>
+                    <select
+                        id="sortBy"
+                        name="sortBy"
+                        value={filters.sortBy}
+                        onChange={handleFilterChange}
+                        className="form-control"
+                    >
+                        <option value="lastname">Last Name</option>
+                        <option value="firstname">First Name</option>
+                        <option value="position">Position</option>
+                        <option value="username">Username</option>
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <label htmlFor="sortOrder">Order:</label>
+                    <select
+                        id="sortOrder"
+                        name="sortOrder"
+                        value={filters.sortOrder}
+                        onChange={handleFilterChange}
+                        className="form-control"
+                    >
+                        <option value="asc">Ascending</option>
+                        <option value="desc">Descending</option>
+                    </select>
+                </div>
             </div>
+
+            {error && (
+                <div className="alert alert-error" role="alert">
+                    {error}
+                </div>
+            )}
+
+            {loading ? (
+                <div className="loading">Loading employees...</div>
+            ) : (
+                <>
+                    <div className="users-table-container">
+                        <table className="users-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Position</th>
+                                    <th>Email</th>
+                                    {isAdmin && <th>Actions</th>}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {userList.map(user => (
+                                    <tr key={user.username}>
+                                        <td>{user.firstname} {user.lastname}</td>
+                                        <td>@{user.username}</td>
+                                        <td>{user.position}</td>
+                                        <td>{user.email}</td>
+                                        {isAdmin && (
+                                            <td className="actions">
+                                                <button
+                                                    onClick={() => handleViewDetails(user.username)}
+                                                    className="btn btn-secondary btn-sm"
+                                                >
+                                                    View
+                                                </button>
+                                                <button
+                                                    onClick={() => handleEdit(user.username)}
+                                                    className="btn btn-primary btn-sm"
+                                                >
+                                                    Edit
+                                                </button>
+                                            </td>
+                                        )}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="pagination">
+                        <button
+                            onClick={() => setPage(p => Math.max(1, p - 1))}
+                            disabled={page === 1}
+                            className="btn btn-secondary"
+                        >
+                            Previous
+                        </button>
+                        <span className="page-info">
+                            Page {page} of {totalPages}
+                        </span>
+                        <button
+                            onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                            disabled={page === totalPages}
+                            className="btn btn-secondary"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </>
+            )}
         </div>
     );
-}
+};
+
+export default AllUsers;

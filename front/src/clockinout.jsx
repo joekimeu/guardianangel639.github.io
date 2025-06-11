@@ -1,159 +1,192 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from './context/AuthProvider';
-import { jwtDecode } from 'jwt-decode';
-import { DarkModeContext } from './DarkModeContext';
-import './global.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { clockInOut, handleApiError } from './services/api';
 import './clockinout.css';
 
 const ClockInOut = () => {
-    const { auth } = useContext(AuthContext);
-    const [history, setHistory] = useState([]);
-    const [currentStatus, setCurrentStatus] = useState(null);
+    const { auth } = useAuth();
+    const navigate = useNavigate();
+    
+    const [status, setStatus] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [message, setMessage] = useState(null);
-    const { darkMode } = useContext(DarkModeContext);
-    const employeeUsername = jwtDecode(localStorage.getItem('authToken')).username;
+    const [currentTime, setCurrentTime] = useState(new Date());
 
+    // Update current time every second
     useEffect(() => {
-        fetchHistory();
-        fetchCurrentStatus();
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+
+        return () => clearInterval(timer);
     }, []);
 
-    const fetchHistory = async () => {
-        try {
-            const res = await axios.get(`https://gaha-website-c6534f8cf004.herokuapp.com/clockhistory/${employeeUsername}`, {
-                headers: { Authorization: auth.token }
-            });
-            setHistory(res.data);
-        } catch (err) {
-            setError("Failed to fetch history: " + (err.response?.data?.error || err.message));
-        }
-    };
+    // Fetch current status on mount and every 5 minutes
+    useEffect(() => {
+        const fetchStatus = async () => {
+            try {
+                const currentStatus = await clockInOut.getCurrentStatus();
+                setStatus(currentStatus);
+            } catch (err) {
+                const errorDetails = handleApiError(err);
+                setError(errorDetails.message);
+            }
+        };
 
-    const fetchCurrentStatus = async () => {
-        try {
-            const res = await axios.get('https://gaha-website-c6534f8cf004.herokuapp.com/currentstatus', {
-                headers: { Authorization: auth.token }
-            });
-            setCurrentStatus(res.data);
-        } catch (err) {
-            setError("Failed to fetch current status: " + (err.response?.data?.error || err.message));
-        }
-    };
+        fetchStatus();
+        const statusInterval = setInterval(fetchStatus, 5 * 60 * 1000);
+
+        return () => clearInterval(statusInterval);
+    }, []);
 
     const handleAction = async (action) => {
         setLoading(true);
         setError(null);
-        setMessage(null);
+
         try {
-            const res = await axios.post(`https://gaha-website-c6534f8cf004.herokuapp.com/${action}`, {}, {
-                headers: { Authorization: auth.token }
-            });
-            setMessage(res.data.message);
-            fetchHistory();
-            fetchCurrentStatus();
+            let response;
+            switch (action) {
+                case 'clockIn':
+                    response = await clockInOut.clockIn();
+                    break;
+                case 'clockOut':
+                    response = await clockInOut.clockOut();
+                    break;
+                case 'startLunch':
+                    response = await clockInOut.startLunch();
+                    break;
+                case 'endLunch':
+                    response = await clockInOut.endLunch();
+                    break;
+                default:
+                    throw new Error('Invalid action');
+            }
+
+            // Update status after successful action
+            setStatus(await clockInOut.getCurrentStatus());
+            
+            // Show success message (could be enhanced with a toast notification)
+            console.log(response.message);
         } catch (err) {
-            setError(`Failed to ${action}: ` + (err.response?.data?.error || err.message));
+            const errorDetails = handleApiError(err);
+            setError(errorDetails.message);
         } finally {
             setLoading(false);
         }
     };
 
-    const formatDate = (dateString) => {
-        if (!dateString) return 'N/A';
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-        });
-    };
-
-    const formatTime = (timeString) => {
-        if (!timeString) return 'N/A';
-        const time = new Date(`2000-01-01T${timeString}`);
-        return time.toLocaleTimeString('en-US', {
+    const formatTime = (date) => {
+        return new Date(date).toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
-            hour12: true,
+            hour12: true
         });
     };
 
-    const calculateDuration = (start, end) => {
-        if (!start || !end) return 'N/A';
-        const startTime = new Date(`2000-01-01T${start}`);
-        const endTime = new Date(`2000-01-01T${end}`);
-        const duration = (endTime - startTime) / 1000 / 60; // duration in minutes
-        const hours = Math.floor(duration / 60);
-        const minutes = Math.round(duration % 60);
-        return `${hours}h ${minutes}m`;
+    const getStatusDisplay = () => {
+        if (!status) return 'Not Clocked In';
+        if (status.clockout_time) return 'Clocked Out';
+        if (status.lunch_start && !status.lunch_end) return 'On Lunch Break';
+        return 'Clocked In';
+    };
+
+    const getAvailableActions = () => {
+        if (!status || status.clockout_time) {
+            return ['clockIn'];
+        }
+        if (status.lunch_start && !status.lunch_end) {
+            return ['endLunch'];
+        }
+        if (!status.lunch_start) {
+            return ['startLunch', 'clockOut'];
+        }
+        return ['clockOut'];
+    };
+
+    const actionLabels = {
+        clockIn: 'Clock In',
+        clockOut: 'Clock Out',
+        startLunch: 'Start Lunch',
+        endLunch: 'End Lunch'
     };
 
     return (
-        <div className={`clockinout-page container mt-5 ${darkMode ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
-            <h2 className="text-center mb-4">Clock In/Out</h2>
-            {error && <div className="alert alert-danger text-center">{error}</div>}
-            {message && <div className="alert alert-success text-center">{message}</div>}
-            <div className="button-group mb-3 text-center">
+        <div className="clock-in-out">
+            <div className="clock-container">
+                <h1>Time Clock</h1>
+                
+                <div className="current-time">
+                    {currentTime.toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true
+                    })}
+                </div>
+
+                <div className="user-info">
+                    <h2>Welcome, {auth.user.firstname} {auth.user.lastname}</h2>
+                    <p className="status">Current Status: {getStatusDisplay()}</p>
+                </div>
+
+                {error && (
+                    <div className="alert alert-error" role="alert">
+                        {error}
+                    </div>
+                )}
+
+                <div className="action-buttons">
+                    {getAvailableActions().map(action => (
+                        <button
+                            key={action}
+                            onClick={() => handleAction(action)}
+                            className={`btn btn-${action === 'clockIn' ? 'primary' : 'secondary'}`}
+                            disabled={loading}
+                        >
+                            {loading ? 'Processing...' : actionLabels[action]}
+                        </button>
+                    ))}
+                </div>
+
+                {status && (
+                    <div className="status-details">
+                        <h3>Today's Activity</h3>
+                        <div className="status-grid">
+                            {status.clockin_time && (
+                                <div className="status-item">
+                                    <span>Clock In:</span>
+                                    <span>{formatTime(status.clockin_time)}</span>
+                                </div>
+                            )}
+                            {status.lunch_start && (
+                                <div className="status-item">
+                                    <span>Lunch Start:</span>
+                                    <span>{formatTime(status.lunch_start)}</span>
+                                </div>
+                            )}
+                            {status.lunch_end && (
+                                <div className="status-item">
+                                    <span>Lunch End:</span>
+                                    <span>{formatTime(status.lunch_end)}</span>
+                                </div>
+                            )}
+                            {status.clockout_time && (
+                                <div className="status-item">
+                                    <span>Clock Out:</span>
+                                    <span>{formatTime(status.clockout_time)}</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
+
                 <button
-                    className="btn btn-success me-2"
-                    onClick={() => handleAction('clockin')}
-                    disabled={loading || (currentStatus && !currentStatus.clockout_time)}
+                    onClick={() => navigate('/punchhistory')}
+                    className="btn btn-link"
                 >
-                    Clock In
+                    View Punch History
                 </button>
-                <button
-                    className="btn btn-warning me-2"
-                    onClick={() => handleAction('lunchstart')}
-                    disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end)}
-                >
-                    Start Lunch
-                </button>
-                <button
-                    className="btn btn-info me-2"
-                    onClick={() => handleAction('lunchend')}
-                    disabled={loading || !currentStatus || !currentStatus.lunch_start || currentStatus.lunch_end}
-                >
-                    End Lunch
-                </button>
-                <button
-                    className="btn btn-danger"
-                    onClick={() => handleAction('clockout')}
-                    disabled={loading || !currentStatus || currentStatus.clockout_time || (currentStatus.lunch_start && !currentStatus.lunch_end)}
-                >
-                    Clock Out
-                </button>
-            </div>
-            <h3 className="text-center mt-5">History</h3>
-            <div className="table-responsive">
-                <table className={`table ${darkMode ? 'table-dark' : 'table-light'} table-striped text-center`}>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Clock In</th>
-                            <th>Lunch Start</th>
-                            <th>Lunch End</th>
-                            <th>Clock Out</th>
-                            <th>Work Duration</th>
-                            <th>Lunch Duration</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {history.map((entry, index) => (
-                            <tr key={index}>
-                                <td>{formatDate(entry.date)}</td>
-                                <td>{formatTime(entry.clockin_time)}</td>
-                                <td>{formatTime(entry.lunch_start)}</td>
-                                <td>{formatTime(entry.lunch_end)}</td>
-                                <td>{formatTime(entry.clockout_time)}</td>
-                                <td>{calculateDuration(entry.clockin_time, entry.clockout_time)}</td>
-                                <td>{calculateDuration(entry.lunch_start, entry.lunch_end)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
             </div>
         </div>
     );

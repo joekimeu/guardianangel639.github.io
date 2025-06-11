@@ -1,62 +1,84 @@
-import React, { useContext } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { DarkModeContext } from './DarkModeContext';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useDarkMode } from './hooks/useDarkMode';
 import './footer.css';
 
-export default function Footer() {
-  const { darkMode } = useContext(DarkModeContext);
+const Footer = () => {
+    const { darkMode } = useDarkMode();
+    const currentYear = new Date().getFullYear();
 
-  return (
-    <footer className={`footer-content ${darkMode ? 'footer-dark' : 'footer-light'}`}>
-      <Container>
-        <Row className="py-5">
-          {/* Logo and Branding */}
-          <Col md={4} className="mb-4 mb-md-0 text-center text-md-start">
-            <h3 className="footer-brand">Guardian Angel Health Agency LLC</h3>
-            <p className="footer-tagline">
-              Close to Heart, Close to Home.
-            </p>
-          </Col>
+    return (
+        <footer className={`footer ${darkMode ? 'dark-theme' : 'light-theme'}`}>
+            <div className="footer-content">
+                <div className="footer-section">
+                    <h3 className="footer-title">Guardian Angel Health Agency</h3>
+                    <p className="footer-description">
+                        Close to Heart, Close to Home. Providing exceptional healthcare services 
+                        with compassion and dedication.
+                    </p>
+                    <div className="footer-contact">
+                        <p>639 S. Hamilton Road</p>
+                        <p>Whitehall, Ohio 43213</p>
+                        <p>Phone: (614) 868-3225</p>
+                        <p>Fax: (614) 868-3437</p>
+                    </div>
+                </div>
 
-          {/* Navigation Links */}
-          <Col md={4} className="mb-4 mb-md-0 text-center">
-            <h4 className="footer-title">Quick Links</h4>
-            <ul className="footer-links">
-              <li><a href="#/about">About Us</a></li>
-              <li><a href="#/contact">Contact Us</a></li>
-              <li><a href="#/prospective">Careers</a></li>
-            </ul>
-          </Col>
+                <div className="footer-section">
+                    <h3 className="footer-title">Quick Links</h3>
+                    <div className="footer-links">
+                        <Link to="/" className="footer-link">Home</Link>
+                        <Link to="/about" className="footer-link">About Us</Link>
+                        <Link to="/contact" className="footer-link">Contact</Link>
+                        <Link to="/trainings" className="footer-link">Trainings</Link>
+                        <Link to="/prospective" className="footer-link">Prospective Employees</Link>
+                    </div>
+                </div>
 
-          {/* Social Media */}
-          <Col md={4} className="text-center text-md-end">
-            <h4 className="footer-title">Connect with Us</h4>
-            <div className="footer-social-icons">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon">
-                <FaFacebookF />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-icon">
-                <FaTwitter />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon">
-                <FaInstagram />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon">
-                <FaLinkedin />
-              </a>
+                <div className="footer-section">
+                    <h3 className="footer-title">Employee Resources</h3>
+                    <div className="footer-links">
+                        <Link to="/signin" className="footer-link">Sign In</Link>
+                        <Link to="/clockinout" className="footer-link">Clock In/Out</Link>
+                        <Link to="/punchhistory" className="footer-link">Punch History</Link>
+                        <Link to="/qrcode" className="footer-link">QR Code</Link>
+                    </div>
+                </div>
+
+                <div className="footer-section">
+                    <h3 className="footer-title">Hours of Operation</h3>
+                    <div className="hours-list">
+                        <div className="hours-item">
+                            <span>Monday - Friday:</span>
+                            <span>8:00 AM - 5:00 PM</span>
+                        </div>
+                        <div className="hours-item">
+                            <span>Saturday & Sunday:</span>
+                            <span>Closed</span>
+                        </div>
+                    </div>
+                    <p className="emergency-notice">
+                        24/7 Emergency Support Available
+                    </p>
+                </div>
             </div>
-          </Col>
-        </Row>
-        <hr className="footer-divider" />
-        <Row>
-          <Col className="text-center">
-            <p className="footer-copyright">
-              &copy; {new Date().getFullYear()} Guardian Angel Health Agency LLC. All rights reserved.
-            </p>
-          </Col>
-        </Row>
-      </Container>
-    </footer>
-  );
-}
+
+            <div className="footer-bottom">
+                <div className="footer-bottom-content">
+                    <p className="copyright">
+                        © {currentYear} Guardian Angel Health Agency LLC. All rights reserved.
+                    </p>
+                    <div className="footer-bottom-links">
+                        <Link to="/privacy" className="footer-link">Privacy Policy</Link>
+                        <span className="separator">|</span>
+                        <Link to="/terms" className="footer-link">Terms of Service</Link>
+                        <span className="separator">|</span>
+                        <Link to="/accessibility" className="footer-link">Accessibility</Link>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;

@@ -1,33 +1,62 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-export const AuthContext = createContext();
+const AuthContext = createContext({});
 
-const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ token: false });
+export const AuthProvider = ({ children }) => {
+    const [auth, setAuth] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Check if token exists in localStorage or cookies
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setAuth({ token });
+    // Check for saved auth state on mount
+    useEffect(() => {
+        const savedAuth = localStorage.getItem('auth');
+        if (savedAuth) {
+            try {
+                const parsedAuth = JSON.parse(savedAuth);
+                setAuth(parsedAuth);
+            } catch (error) {
+                console.error('Failed to parse saved auth state:', error);
+                localStorage.removeItem('auth');
+            }
+        }
+        setIsLoading(false);
+    }, []);
+
+    // Enhanced setAuth that handles both state and persistence
+    const updateAuth = (newAuth) => {
+        setAuth(newAuth);
+        if (newAuth) {
+            try {
+                localStorage.setItem('auth', JSON.stringify(newAuth));
+            } catch (error) {
+                console.error('Failed to save auth state:', error);
+            }
+        } else {
+            localStorage.removeItem('auth');
+        }
+    };
+
+    // Sign out function
+    const signOut = () => {
+        updateAuth(null);
+    };
+
+    // Provide loading state to prevent flash of unauthorized content
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
-  }, []);
 
-  const login = (token) => {
-    localStorage.setItem('authToken', token);
-    setAuth({ token });
-  };
-
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    setAuth({ token: false });
-  };
-
-  return (
-    <AuthContext.Provider value={{ auth, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider value={{ 
+            auth, 
+            setAuth: updateAuth,
+            signOut,
+            isAuthenticated: !!auth?.user,
+            isAdmin: auth?.roles?.includes('Admin') || false,
+            isUser: auth?.roles?.includes('User') || false
+        }}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
-export default AuthProvider;
+export default AuthContext;
