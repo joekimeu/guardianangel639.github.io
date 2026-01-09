@@ -14,14 +14,14 @@
     padding: var(--space-4) 0;
     gap: var(--space-4);
 }
-
+/* 
 .brand-logo-box {
   width: clamp(170px, 6vw, 82px);
   height: clamp(70px, 6vw, 82px);
   overflow: hidden;
-  border-radius: 8px;         /* optional; remove if you want square */
+  border-radius: 8px;        
   display: inline-block;
-}
+} */
 
 /* Zoom the image to FILL the box (cropping excess whitespace) */
 .brand-logo-img {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './layout';
 import Home from './home';
@@ -16,13 +15,12 @@ import PunchHistory from './punchHistory';
 import QRCodeDisplay from './qrCodeDisplay';
 import AllUsers from './allUsers';
 import { DarkModeProvider } from './context/DarkModeContext';
-import { AuthProvider } from './context/AuthProvider';
 import './App.css';
 
 // Define role-based route access
 const USERS = {
-  FULL_ACCESS: ['annemulama', 'joekimeu'],
-  BASIC_ACCESS: ['annemulama', 'joekimeu', 'gahaemployee']
+  FULL_ACCESS: ['annemulama', 'joekimeu', 'phyllismulama'],
+  BASIC_ACCESS: ['annemulama', 'joekimeu', 'gahaemployee', 'doraboamoah', 'tracynungo', 'phyllismulama']
 };
 function App() {
   return (
