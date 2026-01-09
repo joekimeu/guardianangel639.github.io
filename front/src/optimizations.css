@@ -1,0 +1,177 @@
+/* Content-visibility optimization */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Image loading optimizations */
+.blur-load {
+  background-size: cover;
+  background-position: center;
+}
+
+.blur-load.loaded > img {
+  opacity: 1;
+}
+
+.blur-load > img {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+/* Lazy loading sections */
+.lazy-section {
+  min-height: 1px;
+}
+
+/* Font loading optimizations */
+.font-loaded {
+  font-display: optional;
+}
+
+/* Layout shift prevention */
+.aspect-ratio-box {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-ratio-box > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  .optimize-animation {
+    will-change: transform;
+  }
+}
+
+/* Reduce repaints */
+.optimize-paint {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce layout shifts */
+.content-fence {
+  contain: layout style paint;
+}
+
+/* Image loading skeleton */
+.image-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-2) 0%,
+    var(--surface-3) 50%,
+    var(--surface-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Smooth image loading */
+.progressive-image {
+  transition: filter 0.3s ease-out;
+}
+
+.progressive-image.loading {
+  filter: blur(10px);
+}
+
+/* Optimized animations */
+.optimize-gpu {
+  transform: translate3d(0, 0, 0);
+}
+
+/* Prevent FOIT (Flash of Invisible Text) */
+.text-visible {
+  font-display: swap;
+}
+
+/* Optimize large lists */
+.virtual-list {
+  contain: strict;
+}
+
+/* Reduce paint area */
+.clip-content {
+  contain: paint;
+}
+
+/* Optimize transitions */
+.hardware-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Prevent layout shifts from images */
+img {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Optimize scrolling */
+.scroll-container {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Reduce memory usage */
+.cleanup-layer {
+  contain: strict;
+  content-visibility: auto;
+}
+
+/* Optimize modal rendering */
+.modal-content {
+  contain: content;
+}
+
+/* Optimize hover effects */
+@media (hover: hover) {
+  .hover-effect {
+    transition: transform 0.2s ease-out;
+  }
+  
+  .hover-effect:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Print optimizations */
+@media print {
+  .no-break {
+    break-inside: avoid;
+  }
+  
+  .force-break {
+    break-before: page;
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: more) {
+  .contrast-safe {
+    border: 2px solid currentColor;
+  }
+}

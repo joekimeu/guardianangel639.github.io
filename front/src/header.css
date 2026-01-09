@@ -15,13 +15,27 @@
     gap: var(--space-4);
 }
 
-.logo {
-    color: var(--primary-600);
-    font-size: var(--text-xl);
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
+.brand-logo-box {
+  width: clamp(170px, 6vw, 82px);
+  height: clamp(70px, 6vw, 82px);
+  overflow: hidden;
+  border-radius: 8px;         /* optional; remove if you want square */
+  display: inline-block;
 }
+
+/* Zoom the image to FILL the box (cropping excess whitespace) */
+.brand-logo-img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  object-position: 20% 50%;   /* bias left to keep the wing/house visible */
+  display: block;
+}
+
+/* .header-content {
+  padding: var(--space-3) 0;
+  gap: var(--space-3);
+} */
 
 .nav-links {
     display: flex;
@@ -147,11 +161,21 @@
     .username {
         display: none;
     }
+
+    .brand-text {
+        font-size: var(--text-base);
+    }
 }
 
 @media (max-width: 768px) {
+    /* stack rows (you already wrap; we keep it tidy) */
     .header-content {
-        flex-wrap: wrap;
+        row-gap: var(--space-3);
+    }
+
+    /* keep logo visible, tuck the long text if space is tight */
+    .brand-text {
+        display: none; /* show just the icon on small phones */
     }
 
     .nav-links {
@@ -194,3 +218,5 @@
         transition: none;
     }
 }
+
+

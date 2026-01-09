@@ -20,11 +20,10 @@ import { AuthProvider } from './context/AuthProvider';
 import './App.css';
 
 // Define role-based route access
-const ROLES = {
-  User: 'User',
-  Admin: 'Admin'
+const USERS = {
+  FULL_ACCESS: ['annemulama', 'joekimeu'],
+  BASIC_ACCESS: ['annemulama', 'joekimeu', 'gahaemployee']
 };
-
 function App() {
   return (
     <AuthProvider>
@@ -40,7 +39,7 @@ function App() {
             <Route path="unauthorized" element={<Unauthorized />} />
 
             {/* Protected Routes - Users & Admins */}
-            <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Admin]} />}>
+            <Route element={<RequireAuth allowedUsers={USERS.BASIC_ACCESS} />}>
               <Route path="trainings" element={<Trainings />} />
               <Route path="clockinout" element={<ClockInOut />} />
               <Route path="punchhistory" element={<PunchHistory />} />
@@ -48,7 +47,7 @@ function App() {
             </Route>
 
             {/* Protected Routes - Admin Only */}
-            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+            <Route element={<RequireAuth allowedUsers={USERS.FULL_ACCESS} />}>
               <Route path="allusers" element={<AllUsers />} />
               <Route path="operatingcommitte" element={<OperatingCommitte />} />
             </Route>

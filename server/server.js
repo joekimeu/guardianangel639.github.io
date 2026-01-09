@@ -14,11 +14,26 @@ const app = express();
 const PORT = process.env.PORT || 8081;
 const saltRounds = 10;
 
+const allowedOrigins = [
+  'https://localhost:3000',
+  'https://guardianangelha.com',
+  'https://gaha-website-002d2aeac73a.herokuapp.com'
+];
+
 app.use(cors({
-    origin: '*',//'https://localhost:3000, https://guardianangelha.com, https://gaha-website-002d2aeac73a.herokuapp.com',
-    methods: '*',
-    allowedHeaders: '*',
-    credentials: true, // If you are using cookies or HTTP authentication
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  allowedHeaders: '*',
+  credentials: true
 }));
 
 app.use(express.json());

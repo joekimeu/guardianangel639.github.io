@@ -1,27 +1,34 @@
-import { useLocation, Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useAuth from './hooks/useAuth';
 
-const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
-    const location = useLocation();
+/**
+ * Protect routes by **username**.
+ *
+ * @param {string[]} allowedUsers – array of usernames allowed to see the child routes.
+ *                                  Empty array ⇒ any signed-in user is allowed.
+ */
+const RequireAuth = ({ allowedUsers = [] }) => {
+  const { auth } = useAuth();
+  const location = useLocation();
 
-    // Check if user is authenticated
-    if (!auth?.user) {
-        // Not logged in, redirect to login page with return url
-        return <Navigate to="/signin" state={{ from: location }} replace />;
-    }
+  // 1) Not signed in → redirect to sign-in
+  if (!auth?.user) {
+    return <Navigate to="/signin" state={{ from: location }} replace />;
+  }
 
-    // Check if user has required role
-    const hasRequiredRole = auth?.roles?.find(role => allowedRoles?.includes(role));
-    
-    if (!hasRequiredRole) {
-        // Logged in but role not authorized, redirect to unauthorized page
-        // Keep the attempted URL in state for potential future use
-        return <Navigate to="/unauthorized" state={{ from: location, attemptedRole: allowedRoles[0] }} replace />;
-    }
+  // 2) Signed in but username not on the whitelist → unauthorized
+  if (allowedUsers.length && !allowedUsers.includes(auth.user.username)) {
+    return (
+      <Navigate
+        to="/unauthorized"
+        state={{ from: location, attemptedUser: auth.user.username }}
+        replace
+      />
+    );
+  }
 
-    // Authorized, render child components
-    return <Outlet />;
+  // 3) Authorized → render the nested routes
+  return <Outlet />;
 };
 
 export default RequireAuth;

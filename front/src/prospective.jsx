@@ -30,6 +30,30 @@ const Prospective = () => {
                 <div className="container">
                     <section className="section">
                         <div className="card reveal">
+                            <div className="contact-grid">
+                                <div className="contact-info">
+                                    <h2>Contact Information</h2>
+                                    <p>For employment opportunities, please contact our HR department:</p>
+                                    <div className="contact-details">
+                                        <p>Phone: (614) 868-3225</p>
+                                        <p>Fax: (614) 868-3437</p>
+                                        <p>Address: 639 S. Hamilton Road, Whitehall, Ohio 43213</p>
+                                    </div>
+                                    <div className="cta-buttons">
+                                        <a href='https://forms.gle/qHf1bSddKkHFBhQ18' className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                            Fill Out Application
+                                        </a>
+                                        <Link to="/contact" className="btn btn-primary">
+                                            Contact Us
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="section">
+                        <div className="card reveal">
                             <h2 className='career-opportunities'>Career Opportunities</h2>
                             <br />
                             <p className="section-text">
@@ -111,29 +135,7 @@ const Prospective = () => {
                         </div>
                     </section>
 
-                    <section className="section">
-                        <div className="card reveal">
-                            <div className="contact-grid">
-                                <div className="contact-info">
-                                    <h2>Contact Information</h2>
-                                    <p>For employment opportunities, please contact our HR department:</p>
-                                    <div className="contact-details">
-                                        <p>Phone: (614) 868-3225</p>
-                                        <p>Fax: (614) 868-3437</p>
-                                        <p>Address: 639 S. Hamilton Road, Whitehall, Ohio 43213</p>
-                                    </div>
-                                    <div className="cta-buttons">
-                                        <Link to="/contact" className="btn btn-primary">
-                                            Contact Us
-                                        </Link>
-                                        <a href={require('./docs/application.pdf')} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                                            Download Application
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    
                 </div>
             </div>
         </RouteTransition>
