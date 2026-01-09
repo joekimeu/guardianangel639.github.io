@@ -220,3 +220,157 @@
 }
 
 
+/* Hide the old inline nav completely (tabs are now in overlay) */
+.nav-links {
+  display: none !important;
+}
+
+/* Hamburger button */
+.hamburger-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-all);
+}
+
+.hamburger-btn:hover {
+  background: var(--surface-2);
+}
+
+/* 3-line icon */
+.hamburger-lines {
+  width: 22px;
+  height: 16px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger-lines span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--text);
+  border-radius: 999px;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+/* Animate to X when open */
+.hamburger-lines.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-lines.is-open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-lines.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Full page overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Panel takes full page (mobile-friendly) */
+.menu-panel {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5);
+}
+
+/* Dark mode surface harmony */
+.dark-theme .menu-panel {
+  background: var(--surface-2);
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.menu-title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.menu-close {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  transition: var(--transition-all);
+}
+
+.menu-close:hover {
+  background: var(--surface-2);
+}
+
+.menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  overflow: auto;
+}
+
+.menu-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  transition: var(--transition-all);
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.menu-link:hover {
+  background: var(--surface-2);
+  border-color: var(--border);
+}
+
+.menu-footer {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.menu-welcome {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Make sure header-actions stays tight on small screens */
+@media (max-width: 768px) {
+  .username {
+    display: none; /* you already do this; keep it */
+  }
+}
