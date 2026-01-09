@@ -76,13 +76,29 @@ const ClockInOut = () => {
         }
     };
 
-    const formatTime = (date) => {
-        return new Date(date).toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
-    };
+    const formatTime = (value) => {
+        if (!value) return 'N/A';
+
+        // If backend ever returns a full ISO datetime, Date can handle it:
+        const asDate = new Date(value);
+        if (!Number.isNaN(asDate.getTime())) {
+            return asDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        }
+
+        // Handle Postgres TIME like "HH:MM:SS"
+        if (typeof value === 'string' && /^\d{2}:\d{2}(:\d{2})?/.test(value)) {
+            const [hh, mm] = value.split(':');
+            const hour = parseInt(hh, 10);
+            const minute = parseInt(mm, 10);
+
+            const d = new Date();
+            d.setHours(hour, minute, 0, 0);
+            return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        }
+
+        return 'N/A';
+        };
+
 
     const getStatusDisplay = () => {
         if (!status) return 'Not Clocked In';

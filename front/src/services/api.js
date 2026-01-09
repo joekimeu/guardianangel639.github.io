@@ -24,10 +24,10 @@ api.interceptors.request.use((config) => {
     }
   }
 
-  // Fallback legacy key
-//   const token = localStorage.getItem("token");
-//   if (token) config.headers.Authorization = `Bearer ${token}`;
-
+  // temp debug
+if (config.url?.includes("/currentstatus")) {
+    console.log("AUTH HEADER:", config.headers.Authorization);
+  }
   return config;
 });
 
