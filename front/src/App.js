@@ -26,7 +26,6 @@ const USERS = {
 };
 function App() {
   return (
-    <AuthProvider>
       <DarkModeProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -57,7 +56,6 @@ function App() {
           </Route>
         </Routes>
       </DarkModeProvider>
-    </AuthProvider>
   );
 }
 

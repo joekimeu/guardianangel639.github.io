@@ -61,16 +61,18 @@ const SignIn = () => {
             
             switch (errorDetails.type) {
                 case 'AUTH_ERROR':
-                    setError('Invalid username or password');
+                    setError(errorDetails.message || 'Invalid username or password');
                     break;
                 case 'RATE_LIMIT':
-                    setError('Too many attempts. Please try again later.');
+                    setError(errorDetails.message || 'Too many attempts. Please try again later.');
                     break;
                 case 'NETWORK_ERROR':
-                    setError('Unable to connect to server. Please check your internet connection.');
+                    setError(errorDetails.message || 'Unable to connect to server. Please check your internet connection.');
                     break;
+                case 'CLIENT_ERROR':
+                    setError(errorDetails.message || 'An unexpected error client occurred')
                 default:
-                    setError('An error occurred. Please try again.');
+                    setError(errorDetails.message || 'An error occurred. Please try again.');
             }
         } finally {
             setLoading(false);

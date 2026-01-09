@@ -9,26 +9,76 @@ const api = axios.create({
 });
 
 // Add token to requests if it exists
-api.interceptors.request.use(config => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+// api.interceptors.request.use(config => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//         config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+// });
+
+// // Handle token expiration
+// api.interceptors.response.use(
+//     response => response,
+//     error => {
+//         if (error.response?.status === 401) {
+//             localStorage.removeItem('token');
+//             localStorage.removeItem('user');
+//             window.location.href = '/signin';
+//         }
+//         return Promise.reject(error);
+//     }
+// );
+
+// Add token to requests if it exists
+api.interceptors.request.use((config) => {
+  // Prefer AuthProvider storage
+  const rawAuth = localStorage.getItem("auth");
+  if (rawAuth) {
+    try {
+      const parsed = JSON.parse(rawAuth);
+      if (parsed?.token) {
+        config.headers.Authorization = `Bearer ${parsed.token}`;
+        return config;
+      }
+    } catch {
+      // ignore parse errors
     }
-    return config;
+  }
+
+  // Fallback legacy key
+  const token = localStorage.getItem("token");
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
 });
 
-// Handle token expiration
+// Handle token expiration (but DO NOT hijack the /signin call)
 api.interceptors.response.use(
-    response => response,
-    error => {
-        if (error.response?.status === 401) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            window.location.href = '/signin';
-        }
-        return Promise.reject(error);
+  (response) => response,
+  (error) => {
+    const status = error?.response?.status;
+    const url = error?.config?.url || "";
+
+    // If this 401 is coming from a sign-in attempt, let SignIn.jsx handle it
+    if (status === 401 && url.includes("/signin")) {
+      return Promise.reject(error);
     }
+
+    if (status === 401) {
+      // Clear both storage styles
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("auth");
+
+      // Use hash redirect so HashRouter actually goes to the SignIn route
+      window.location.href = `${window.location.origin}/#/signin`;
+    }
+
+    return Promise.reject(error);
+  }
 );
+
 
 // Authentication API
 export const auth = {
