@@ -9,28 +9,6 @@ const api = axios.create({
 });
 
 // Add token to requests if it exists
-// api.interceptors.request.use(config => {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//         config.headers.Authorization = `Bearer ${token}`;
-//     }
-//     return config;
-// });
-
-// // Handle token expiration
-// api.interceptors.response.use(
-//     response => response,
-//     error => {
-//         if (error.response?.status === 401) {
-//             localStorage.removeItem('token');
-//             localStorage.removeItem('user');
-//             window.location.href = '/signin';
-//         }
-//         return Promise.reject(error);
-//     }
-// );
-
-// Add token to requests if it exists
 api.interceptors.request.use((config) => {
   // Prefer AuthProvider storage
   const rawAuth = localStorage.getItem("auth");
@@ -47,8 +25,8 @@ api.interceptors.request.use((config) => {
   }
 
   // Fallback legacy key
-  const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = `Bearer ${token}`;
+//   const token = localStorage.getItem("token");
+//   if (token) config.headers.Authorization = `Bearer ${token}`;
 
   return config;
 });
@@ -86,12 +64,14 @@ export const auth = {
         try {
             const response = await api.post('/signin', credentials);
             if (response.data.token) {
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('user', JSON.stringify(response.data.user));
+                // localStorage.setItem('token', response.data.token);
+                // localStorage.setItem('user', JSON.stringify(response.data.user));
             }
             return response.data;
         } catch (error) {
-            throw new Error(error.response?.data?.error || 'Sign in failed');
+            // Preserve Axios error shape (error.response.status, etc.)
+           throw error;
+        //throw new Error(error.response?.data?.error || 'Sign in failed');
         }
     },
 
