@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { employees, handleApiError } from './services/api';
 import { useAuth } from './hooks/useAuth';
 import debounce from 'lodash/debounce';
-import './searchResults.css';
 
 const SearchResults = () => {
     const location = useLocation();

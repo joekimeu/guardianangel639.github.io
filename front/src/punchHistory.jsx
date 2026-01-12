@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth } from './hooks/useAuth';
 import { clockInOut, handleApiError } from './services/api';
+import { useParams, Navigate } from 'react-router-dom';
+
 import './punchHistory.css';
 
 const PunchHistory = () => {
   const { auth } = useAuth();
+  const { username } = useParams();
 
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -18,10 +21,12 @@ const PunchHistory = () => {
 
   const itemsPerPage = 10;
 
+  const targetUsername = username;
+
   useEffect(() => {
     fetchHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, dateFilter, sortOrder]);
+  }, [page, dateFilter, sortOrder, username]);
 
   // --- Helpers: safe parsing for Postgres DATE + TIME ---
 
@@ -61,16 +66,26 @@ const PunchHistory = () => {
     };
   };
 
-  // Combine DATE + TIME into a real Date object (local time)
-  const combineDateTime = (dateStr, timeStr) => {
-    const d = parsePgDate(dateStr);
-    const t = parsePgTime(timeStr);
-    if (!d || !t) return null;
+ // Combine DATE + TIME into a real Date object (interpret TIME as UTC)
+const combineDateTime = (dateStr, timeStr) => {
+  const d = parsePgDate(dateStr);
+  const t = parsePgTime(timeStr);
+  if (!d || !t) return null;
 
-    const combined = new Date(d);
-    combined.setHours(t.h, t.m, t.s, 0);
-    return combined;
-  };
+  // Build an absolute UTC timestamp, then let JS render it in local time
+  const utcMillis = Date.UTC(
+    d.getFullYear(),
+    d.getMonth(),
+    d.getDate(),
+    t.h,
+    t.m,
+    t.s,
+    0
+  );
+
+  return new Date(utcMillis);
+};
+
 
   const formatDateOnly = (dateStr) => {
     const d = parsePgDate(dateStr);
@@ -129,7 +144,7 @@ const PunchHistory = () => {
       setError(null);
 
       // NOTE: backend currently returns an ARRAY of rows (no total count)
-      const rows = await clockInOut.getHistory(auth.user.username, page, itemsPerPage);
+      const rows = await clockInOut.getHistory(targetUsername, page, itemsPerPage);;
 
       let data = Array.isArray(rows) ? rows : [];
 

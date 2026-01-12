@@ -73,14 +73,18 @@ const AllUsers = () => {
     };
 
     const handleViewDetails = (username) => {
-        navigate(`/employees/${username}`);
+        navigate(`/read/${username}`);
     };
 
     const handleEdit = (username) => {
-        navigate(`/employees/${username}/edit`);
+        navigate(`/edit/${username}`);
     };
 
-    const isAdmin = auth.user.position === 'Administrator';
+    const handlePunchcard = (username) => {
+        navigate(`/punchhistory/${username}`)
+    }
+
+    const isAdmin = auth.user.position === 'Director, Clinical Services';
 
     return (
         <div className="all-users">
@@ -179,7 +183,7 @@ const AllUsers = () => {
                                             <td className="actions">
                                                 <button
                                                     onClick={() => handleViewDetails(user.username)}
-                                                    className="btn btn-secondary btn-sm"
+                                                    className="btn btn-light btn-sm"
                                                 >
                                                     View
                                                 </button>
@@ -189,6 +193,18 @@ const AllUsers = () => {
                                                 >
                                                     Edit
                                                 </button>
+                                                <button
+                                                    onClick={() => handlePunchcard(user.username)}
+                                                    className="btn btn-success btn-sm"
+                                                >
+                                                    Punchard
+                                                </button>
+                                                {/* <button
+                                                    onClick={() => handleViewDetails(user.username)}
+                                                    className="btn btn-light btn-sm"
+                                                >
+                                                    Delete
+                                                </button> */}
                                             </td>
                                         )}
                                     </tr>

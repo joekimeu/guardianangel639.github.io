@@ -5,25 +5,21 @@ import { useDarkMode } from './hooks/useDarkMode';
 import useAuth from './hooks/useAuth';
 import './header.css';
 
-// Optional logo import (leave if you actually use it)
-// import gaLogo from '../src/logos/logo4.png';
-
 const Header = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const { auth, signOut, isAdmin } = useAuth();
+  const { auth, signOut, can } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleSignOut = () => {
-    // preserve existing behavior
     signOut();
     setMenuOpen(false);
     navigate('/signin');
   };
 
-  // Close menu on route change (covers clicking Links + programmatic navs)
+  // Close menu on route change
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -52,27 +48,24 @@ const Header = () => {
       { to: '/', label: 'Home' },
       { to: '/about', label: 'About' },
       { to: '/contact', label: 'Contact' },
-      { to: '/trainings', label: 'Trainings' },
       { to: '/prospective', label: 'Prospective' },
     ];
 
     if (!auth?.user) return base;
 
-    const authed = [
-      { to: '/clockinout', label: 'Clock In/Out' },
-      { to: '/punchhistory', label: 'Punch History' },
-      { to: '/qrcode', label: 'QR Code' },
+    const protectedLinks = [
+      { to: '/clockinout', label: 'Clock In/Out', perm: 'approve_time' },
+      { to: `/punchhistory/${auth.user.username}`, label: 'Punch History', perm: 'approve_time' },
+      { to: '/trainings', label: 'Trainings', perm: 'default_trainings' },
+      { to: '/allusers', label: 'All Users', perm: 'manage_system' },
+      { to: '/operatingcommitte', label: 'Operating Committee', perm: 'manage_system' },
     ];
 
-    const admin = isAdmin()
-      ? [
-          { to: '/allusers', label: 'All Users' },
-          { to: '/operatingcommitte', label: 'Operating Committee' },
-        ]
-      : [];
-
-    return [...base, ...authed, ...admin];
-  }, [auth?.user, isAdmin]);
+    return [
+      ...base,
+      ...protectedLinks.filter((l) => !l.perm || can(l.perm)),
+    ];
+  }, [auth?.user, can]);
 
   return (
     <header className={`header ${darkMode ? 'dark-theme' : 'light-theme'}`}>
@@ -80,15 +73,10 @@ const Header = () => {
         <div className="header-content">
           {/* Brand */}
           <Link to="/" className="brand" aria-label="Guardian Angel Health Agency Home">
-            <div className="brand-logo-box">
-              {/* Example if using image:
-              <img src={gaLogo} alt="Guardian Angel Health Agency logo" className="brand-logo-img" />
-              */}
-              Guardian Angel Health Agency
-            </div>
+            <div className="brand-logo-box">Guardian Angel Health Agency</div>
           </Link>
 
-          {/* Right-side actions stay visible (theme + auth + hamburger) */}
+          {/* Right-side actions */}
           <div className="header-actions">
             <button
               onClick={toggleDarkMode}
@@ -101,10 +89,7 @@ const Header = () => {
 
             {auth?.user ? (
               <div className="user-menu">
-                <span className="username">
-                  Welcome, {auth.user.firstname}!
-                  {isAdmin() && <span className="role-badge">Admin</span>}
-                </span>
+                <span className="username">Welcome, {auth.user.firstname}!</span>
                 <button onClick={handleSignOut} className="btn btn-outline">
                   Sign Out
                 </button>
@@ -134,7 +119,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Full-page overlay menu */}
+      {/* Full-page overlay */}
       <div
         id="mobile-menu-overlay"
         className={`menu-overlay ${menuOpen ? 'open' : ''}`}
@@ -142,7 +127,6 @@ const Header = () => {
         aria-modal="true"
         aria-label="Site menu"
         onMouseDown={(e) => {
-          // click outside panel closes
           if (e.target === e.currentTarget) setMenuOpen(false);
         }}
       >
@@ -164,14 +148,9 @@ const Header = () => {
 
           <div className="menu-footer">
             {auth?.user ? (
-              <>
-                <div className="menu-welcome">
-                  Welcome, {auth.user.firstname}! {isAdmin() ? <span className="role-badge">Admin</span> : null}
-                </div>
-                <button onClick={handleSignOut} className="btn btn-outline menu-signout">
-                  Sign Out
-                </button>
-              </>
+              <button onClick={handleSignOut} className="btn btn-outline menu-signout">
+                Sign Out
+              </button>
             ) : (
               <Link to="/signin" className="btn btn-primary menu-signin">
                 Sign In

@@ -22,16 +22,20 @@ export const useAuth = () => {
         return requiredRoles.includes(context.auth.user.position);
     };
 
+    const isEmployee = () => {
+        return hasRole(['Administrator', 'Director, Clinical Services', 'Office Manager', 'Employee']);
+    };
+
     const isAdmin = () => {
-        return hasRole(['Administrator']);
+        return hasRole(['Administrator', 'Director, Clinical Services']);
     };
 
     const isDirector = () => {
-        return hasRole(['Director, Clinical Services']);
+        return hasRole(['Director, Clinical Services', 'Administrator']);
     };
 
     const isManager = () => {
-        return hasRole(['Administrator', 'Director, Clinical Services', 'Chief Secretary']);
+        return hasRole(['Administrator', 'Director, Clinical Services', 'Office Manager']);
     };
 
     const can = (action) => {
@@ -42,6 +46,7 @@ export const useAuth = () => {
             'approve_time': () => isManager(),
             'manage_system': () => isAdmin(),
             'view_reports': () => isManager(),
+            'default_trainings': () => isEmployee(),
             'manage_trainings': () => isDirector() || isAdmin(),
             'clock_in_out': () => isAuthenticated,
             'view_own_records': () => isAuthenticated

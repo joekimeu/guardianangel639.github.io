@@ -76,28 +76,44 @@ const ClockInOut = () => {
         }
     };
 
-    const formatTime = (value) => {
-        if (!value) return 'N/A';
+   const formatTime = (value) => {
+  if (!value) return 'N/A';
 
-        // If backend ever returns a full ISO datetime, Date can handle it:
-        const asDate = new Date(value);
-        if (!Number.isNaN(asDate.getTime())) {
-            return asDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-        }
+  // If backend ever returns a full ISO datetime, Date can handle it:
+  const asDate = new Date(value);
+  if (!Number.isNaN(asDate.getTime())) {
+    return asDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  }
 
-        // Handle Postgres TIME like "HH:MM:SS"
-        if (typeof value === 'string' && /^\d{2}:\d{2}(:\d{2})?/.test(value)) {
-            const [hh, mm] = value.split(':');
-            const hour = parseInt(hh, 10);
-            const minute = parseInt(mm, 10);
+  // Handle Postgres TIME like "HH:MM:SS" (treat it as UTC, then display in local time)
+  if (typeof value === 'string' && /^\d{2}:\d{2}(:\d{2})?/.test(value)) {
+    const [hh, mm, ss = '0'] = value.split(':');
+    const hour = parseInt(hh, 10);
+    const minute = parseInt(mm, 10);
+    const second = parseInt(ss, 10) || 0;
 
-            const d = new Date();
-            d.setHours(hour, minute, 0, 0);
-            return d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-        }
+    // Use today's date, but set the *UTC* time, then convert to local display
+    const now = new Date();
+    const utcMillis = Date.UTC(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      hour,
+      minute,
+      second,
+      0
+    );
 
-        return 'N/A';
-        };
+    return new Date(utcMillis).toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true
+    });
+  }
+
+  return 'N/A';
+};
+
 
 
     const getStatusDisplay = () => {
